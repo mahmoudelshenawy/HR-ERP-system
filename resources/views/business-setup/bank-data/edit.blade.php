@@ -1,5 +1,5 @@
 <!-- Edit business branch Modal -->
-<div id="edit_bank{{$bank->id}}" class="modal custom-modal fade" role="dialog">
+<div id="edit_bank{{$id}}" class="modal custom-modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +12,7 @@
 
 
             <div class="modal-body">
-                <form method="post" action="{{url('business-setup/bank-data/'.$bank->id)}}" >
+                <form method="post" action="{{url('business-setup/bank-data/'.$id)}}" >
                     <input name="_method" type="hidden" value="PUT">
                     @csrf()
                     <div class="row">
@@ -20,25 +20,25 @@
                         <div class="col-sm-6 ">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.bank_code')}} <span class="text-danger"></span></label>
-                                <input class="form-control" type="text" name="code" value="{{$bank->code}}">
+                                <input class="form-control" type="text" name="code" value="{{$code}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.bank_name')}}<span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="name" value="{{$bank->name}}">
+                                <input class="form-control" type="text" name="name" value="{{$name}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.bank_phone')}}<span class="text-danger"></span></label>
-                                <input class="form-control" type="tel" name="phone" value="{{$bank->phone}}">
+                                <input class="form-control" type="tel" name="phone" value="{{$phone}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.bank_address')}}<span class="text-danger"></span></label>
-                                <input class="form-control" type="text" name="address" value="{{$bank->address}}">
+                                <input class="form-control" type="text" name="address" value="{{$address}}">
                             </div>
                         </div>
 

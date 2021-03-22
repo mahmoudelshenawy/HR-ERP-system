@@ -3,8 +3,14 @@
      <!-- Page Content -->
                 <div class="row" style="padding-top: 30px">
                     <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3 offset-1" >
-                        <a href="#" class="btn btn-outline-success btn-block" style="min-height: 50px;padding-top: 10px" data-toggle="modal" data-target="#add_role"><i class="fa fa-plus"></i>
-                            {{__('employee.contract_type')}}
+                        <a href="#" class="form-group   btn-block">
+                            <label class="col-form-label text-dark">{{__('employee.contract_type')}}</label>
+                            <select class="js-example-matcher-start" name="contract_types_id" >
+                                <option  selected value="" >{{__('employee.select')}}</option>
+                                @foreach(DB::table('contract_types')->get() as $contract_type)
+                                    <option value="{{$contract_type->id}}" > {{$contract_type->name}}</option>
+                                @endforeach
+                            </select>
                         </a>
 
                         <div class="roles-menu none-border"  >
@@ -86,7 +92,7 @@
                                     </div>
                                 <div class="form-group col-6">
                                     <label class="col-form-label">{{trans('employee.manager_name')}}</label>
-                                    <select class="select js-example-matcher-start"  name="manager_id" >
+                                    <select class=" js-example-matcher-start"  name="manager_id" >
                                         <option selected value="">{{__('employee.select')}}</option>
                                         @foreach(DB::table('employee_general_data')->where('statue' , 'active')->get() as $manager)
                                             <option value="{{$manager->id}}">{{$manager->code}}    -   {{$manager->employee_name}} </option>
@@ -154,12 +160,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <select class="js-example-matcher-start form-control" name="contract_types_id" >
-                                    <option  selected value="" >{{__('employee.select')}}</option>
-                                    @foreach(DB::table('contract_types')->get() as $contract_type)
-                                        <option value="{{$contract_type->id}}" > {{$contract_type->name ." - ".$contract_type->arabic_name}}</option>
-                                    @endforeach
-                                </select>
+
                             </div>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\BusinessSetup;
 
 use App\BusinessAdministration;
 use App\BusinessBranch;
+use App\DataTables\AdministrationsDatatable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,12 +16,11 @@ class AdministrationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(AdministrationsDatatable $datatable)
     {
         //
         $administrations = BusinessAdministration::with('businessBranch')->get();
-        $branchs = BusinessBranch::all();
-        return view('business-setup.business-administration.index',compact(['administrations','branchs']));
+        return $datatable->render('business-setup.business-administration.index',compact(['administrations']));
     }
     /**
      * Show the form for creating a new resource.

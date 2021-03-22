@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BusinessSetup;
 
+use App\DataTables\GuarantorsDatatable;
 use App\Guarantor;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -9,15 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class GuarantorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
-
-
-
     private function rules ($id){
         return $rules =  ['guarantorCode'=>'Required|Numeric|unique:guarantors,code,'.$id,
             'guarantorName' => 'Required|max:255|unique:guarantors,name,'.$id,
@@ -35,11 +27,9 @@ class GuarantorController extends Controller
 
 
 
-    public function index()
+    public function index(GuarantorsDatatable $datatable)
     {
-        //
-        $guarantors = Guarantor::all();
-        return view('business-setup.guarantor.index',compact(['guarantors']));
+        return $datatable->render('business-setup.guarantor.index');
     }
 
     /**
@@ -72,7 +62,7 @@ class GuarantorController extends Controller
         $guarantor->name = $request->guarantorName ;
         $guarantor->phone = $request->guarantorPhone ;
         $guarantor->address = $request->guarantorAddress ;
-        $guarantor->img = $this->imgHandeler($request,'guarantorImage',$guarantor->code);
+        $guarantor->img = $this->imgHandeler($request,'guarantorImage',$guarantor->name);
         if ($guarantor->save()){
             return redirect()->back()->with('success',__('general.success'));
         }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\BusinessSetup;
 use App\BusinessDepartment;
 use App\BusinessAdministration;
 use App\BusinessBranch;
+use App\DataTables\DepartmentsDatatable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -15,15 +16,15 @@ class DepartmentController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param DepartmentsDatatable $datatable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(DepartmentsDatatable $datatable)
     {
-        //
         $departments = BusinessDepartment::with('administration')->get();
         $branches = BusinessBranch::all();
         $administration = BusinessAdministration::all();
-        return view('business-setup.business-department.index',compact(['departments','branches','administration']));
+        return $datatable->render('business-setup.business-department.index',compact('departments','branches','administration'));
     }
 
     /**

@@ -70,6 +70,9 @@
             <label>{{__('user.employee')}} <span class="text-danger"></span></label>
             <?php $allEmployees = \App\EmployeeGeneralData::all(['id' , 'employee_name']) ?>
             <select name="employee_id" class="js-example-matcher-start @error('employee_id') is-invalid @enderror">
+                @if(!$user->employee_id)
+                    <option selected disabled>{{__('employee.select')}}</option>
+                @endif
                 @foreach($allEmployees as $employee)
                     <option value="{{$employee->id}}" {{$user->employee_id == $employee->id ? 'selected' : ''}}>{{$employee->employee_name}}</option>
                 @endforeach
@@ -89,7 +92,7 @@
                 <th class="text-center">Create</th>
                 <th class="text-center">Update</th>
                 <th class="text-center">Delete</th>
-               
+
             </tr>
         </thead>
         <tbody>

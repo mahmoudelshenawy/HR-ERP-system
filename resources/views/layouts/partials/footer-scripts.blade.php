@@ -1,7 +1,6 @@
 <!-- jQuery -->
-
-
         <script src="{{asset(App::getLocale().'/js/jquery-3.2.1.min.js')}}"></script>
+            <script src="{{ mix('js/app.js') }}"></script>
 
 		<!-- Bootstrap Core JS -->
         <script src="{{asset(App::getLocale().'/js/popper.min.js')}}"></script>
@@ -45,8 +44,10 @@
 		<script src="js/dropfiles.js"></script> -->
 		<!-- Custom JS -->
 		<script src="{{asset(App::getLocale().'/js/app.js')}}"></script>
+		<script src="{{asset('js/notify.min.js')}}"></script>
 
 <!-- dataTables js files  -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/searchpanes/1.1.1/js/dataTables.searchPanes.min.js"></script>
 <script src="https://cdn.datatables.net/select/1.3.1/js/dataTables.select.min.js"></script>
@@ -55,16 +56,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.flash.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
 <script src="https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/dataTables.responsive.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.2.6/js/responsive.bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/plug-ins/1.10.21/sorting/datetime-moment.js"></script>
 <script src="{{asset(App::getLocale().'/js/dataTables.bootstrap4.min.js')}}"></script>
 
 <!---------------   select drop menue  js file ----------------->
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
+<script src="{{asset('pdf/pdfmake.min.js')}}"></script>
+<script src="{{asset('pdf/vfs_fonts.js')}}"></script>
 
-@yield('js')
-		<script>
+<script>
 		$(".header").stick_in_parent({
 
 		});
@@ -120,7 +125,7 @@
 			}
 		});
 		$(function () {
-			$(document).on("click", '.btn-add-row', function () {
+			$(document).on("click", '.datatable_columns-add-row', function () {
 				var id = $(this).closest("table.table-review").attr('id');  // Id of particular table
 				console.log(id);
 				var div = $("<tr />");
@@ -128,22 +133,24 @@
 				$("#"+id+"_tbody").append(div);
 			});
 			$(document).on("click", "#comments_remove", function () {
-				$(this).closest("tr").prev().find('td:last-child').html('<button type="button" class="btn btn-danger" id="comments_remove"><i class="fa fa-trash-o"></i></button>');
+				$(this).closest("tr").prev().find('td:last-child').html('<button type="button" class="datatable_columns datatable_columns-danger" id="comments_remove"><i class="fa fa-trash-o"></i></button>');
 				$(this).closest("tr").remove();
 			});
 			function GetDynamicTextBox(table_id) {
 				$('#comments_remove').remove();
 				var rowsLength = document.getElementById(table_id).getElementsByTagName("tbody")[0].getElementsByTagName("tr").length+1;
-				return '<td>'+rowsLength+'</td>' + '<td><input type="text" name = "DynamicTextBox" class="form-control" value = "" ></td>' + '<td><input type="text" name = "DynamicTextBox" class="form-control" value = "" ></td>' + '<td><input type="text" name = "DynamicTextBox" class="form-control" value = "" ></td>' + '<td><button type="button" class="btn btn-danger" id="comments_remove"><i class="fa fa-trash-o"></i></button></td>'
+				return '<td>'+rowsLength+'</td>' + '<td><input type="text" name = "DynamicTextBox" class="form-control" value = "" ></td>' + '<td><input type="text" name = "DynamicTextBox" class="form-control" value = "" ></td>' + '<td><input type="text" name = "DynamicTextBox" class="form-control" value = "" ></td>' + '<td><button type="button" class="datatable_columns datatable_columns-danger" id="comments_remove"><i class="fa fa-trash-o"></i></button></td>'
 			}
 		});
 ////////////////////////// select form style ////////////////////////////////
+
          $(".js-example-matcher-start").select2({
              width: '100%',
              minHeight:'100%',
              lineHeight:'44px',
          });
         ////////////////////////// datatime input format ////////////////////////////////
+
         $('.datetimepicker').datetimepicker({
              format: 'DD/MM/YYYY',
              locale: 'en'
@@ -169,14 +176,6 @@
          }
 
         </script>
-<!-------------------------ALERTS message style -------------->
-<script>
-    window.setTimeout(function() {
-        $(".flashMessage").fadeTo(500, 0).slideUp(500, function(){
-            $(this).remove();
-        });
-    }, 3000);
-</script>
 
 <!-------------------------img preview before upload -------------->
 <script>
@@ -197,3 +196,4 @@
         });
     })
 </script>
+@yield('js')

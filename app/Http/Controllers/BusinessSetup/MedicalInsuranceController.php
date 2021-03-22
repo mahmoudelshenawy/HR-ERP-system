@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\BusinessSetup;
 
+use App\DataTables\InsuranceProvidersDatatable;
 use App\Http\Controllers\Controller;
 use App\MedicalInsurance;
 use Illuminate\Http\Request;
@@ -25,11 +26,10 @@ class MedicalInsuranceController extends Controller
     }
 
 
-    public function index()
+    public function index(InsuranceProvidersDatatable $datatable)
     {
         //
-        $medicals = MedicalInsurance::get();
-        return view('business-setup.medical-insurance.index',compact(['medicals']));
+       return $datatable->render('business-setup.medical-insurance.index');
     }
 
     /**

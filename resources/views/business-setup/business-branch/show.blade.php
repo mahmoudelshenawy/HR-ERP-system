@@ -78,9 +78,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="pro-edit">
-                                    <a data-target="#branch_basic_data" data-toggle="modal" class="edit-icon" href="#"><i class="fa fa-pencil"></i></a>
+                                <div class="pro-edit d-flex">
+                                    <a data-target="#branch_basic_data" data-toggle="modal" class="edit-icon ml-3" href="#"><i class="fa fa-pencil"></i></a>
                                 </div>
+
                             </div>
                         </div>
                     </div>
@@ -91,23 +92,16 @@
                 <div class="row user-tabs">
                     <div class="col-lg-12 col-md-12 col-sm-12 line-tabs">
                         <ul class="nav nav-tabs nav-tabs-bottom">
-                            <li class="nav-item"><a href="#attendence_list" data-toggle="tab" class="nav-link active">{{trans('business-setup.branch_days_time')}}</a></li>
-                            <li class="nav-item"><a href="#employees" data-toggle="tab" class="nav-link">{{trans('employee.employees')}}</a></li>
-                            <li class="nav-item"><a href="#emp_projects" data-toggle="tab" class="nav-link">{{'الحضور'}}</a></li>
-                            <li class="nav-item"><a href="#bank_statutory" data-toggle="tab" class="nav-link">{{'الغائبين'}} <small class="text-danger">(Admin Only)</small></a></li>
+                            <li class="nav-item"><a href="#attendence_list" data-toggle="tab" class="nav-link active">{{''}}</a></li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <div class="tab-content">
-                @include('business-setup.business-branch.branch_details.branch_employees_dataTable')
-            </div>
-
                 <!--       edit parts             -->
                 @include('business-setup.business-branch.branch_details_edit.basic_data')
                 {{-- edit attendence rules --}}
-                @include('business-setup.business-branch.branch_details_edit.edit_attendence_rules')
+
 @endsection
 @section('css')
  <style>

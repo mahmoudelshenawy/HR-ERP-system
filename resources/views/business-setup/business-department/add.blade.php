@@ -15,7 +15,7 @@
                         <div class="col-sm-6 ">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.administration')}} <span class="text-danger">*</span></label>
-                                <select class="select js-example-matcher-start" name="administrationName[]" multiple>
+                                <select class="  form-control js-example-matcher-start" name="administrationName[]" multiple>
                                     @foreach($branches as $branch)
                                         <optgroup label="{{$branch->name}}">
                                             @foreach($branch->administration->where('business_branche_id',$branch->id) as $administration)

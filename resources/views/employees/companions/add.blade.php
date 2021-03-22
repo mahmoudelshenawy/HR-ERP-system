@@ -16,8 +16,9 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('employee.select_employee')}}<span class="text-danger">*</span></label>
-                                <select class="select" name="employee_id" >
-                                    @foreach($employees as $employee)
+                                <select class="js-example-matcher-start" name="employee_id" >
+                                    <option>{{__('general.select')}}</option>
+                                    @foreach(App\EmployeeGeneralData::where('statue','active')->get() as $employee)
                                         <option value="{{$employee->id}}">{{$employee->employee_name}}</option>
                                     @endforeach
                                 </select>
@@ -33,7 +34,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('employee.relative_relation')}}<span class="text-danger">*</span></label>
-                                <select class="select" name="relative_relation" >
+                                <select class="js-example-matcher-start" name="relative_relation" >
+                                    <option>{{__('general.select')}}</option>
                                     @foreach(config("enums.companions") as $relation)
                                             <option value="{{$relation}}">{{$relation }}</option>
                                     @endforeach
@@ -58,97 +60,59 @@
                                 <input type="text" class="form-control floating datetimepicker"  name="birth_date" >
                             </div>
                         </div>
-
-                        <!---------------------------- insurance block   ----------->
                         <div class="col-sm-6">
-                            <div class="card leave-box" id="leave_sick">
-                                <div class="card-body">
-                                    <form class="form-group">
-                                        <label>{{__('employee.insurance_statue')}}</label>
-                                        <input type="checkbox" name="medical_insurance_statue" class="checktoggle"  style="float: right" id="switch_sick"  onchange="myFunction()">
-                                    </form>
-                                    <div class="leave-item"  id="insurance" style="display: none">
-                                        <div class="leave-row">
-                                            <div class="leave-left">
-                                                <div class="input-box">
-                                                    <div class="form-group">
-                                                        <label>{{__('employee.medical_insurance_type')}}</label>
-                                                        <input type="text" class="form-control"  name="medical_insurance_type">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label>{{__('employee.medical_insurance_provider')}}</label>
-                                                        <select name="medical_insurance_id" class="select2-dropdown js-example-matcher-start form-control" >
-                                                            <option disabled  selected></option>
-                                                            @foreach(DB::table('medical_insurances')->get() as $medical)
-                                                                <option value="{{$medical->id}}">{{$medical->name}}</option>
-                                                            @endforeach
-                                                        </select>
-                                                    </div>
-                                                    <div class="form-group">
-                                                            <label>{{__('employee.medical_insurance_number')}}</label>
-                                                            <input type="number" class="form-control" name="medical_insurance_number">
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>{{__('employee.start_and_expiry')}}</label>
-                                                        <div class="input-group">
-                                                            <div class=" form-focus focused col-6">
-                                                                <div class="cal-icon">
-                                                                    <input type="text" class="form-control floating datetimepicker"  name="medical_insurance_start_data" >
-                                                                </div>
-                                                                <label class="focus-label">{{__('employee.start')}}</label>
-                                                            </div>
-                                                            <div class="form-focus focused col-6">
-                                                                <div class="cal-icon">
-                                                                    <input type="text" class="form-control floating datetimepicker"  name="medical_insurance_end_data" >
-                                                                </div>
-                                                                <label class="focus-label">{{__('employee.expiry_date')}}</label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="form-group">
+                                <label>{{__('employee.medical_insurance_type')}}</label>
+                                <input type="text" class="form-control"  name="medical_insurance_type">
                             </div>
                         </div>
-
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{__('employee.medical_insurance_number')}}</label>
+                                <input type="number" class="form-control" name="medical_insurance_number">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>{{__('employee.medical_insurance_provider')}}</label>
+                                <select name="medical_insurance_id" class="select2-dropdown js-example-matcher-start form-control" >
+                                    <option disabled  selected></option>
+                                    @foreach(DB::table('medical_insurances')->get() as $medical)
+                                        <option value="{{$medical->id}}">{{$medical->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                         <div class=" form-focus focused col-6">
+                             <label>{{__('employee.medical_insurance_start_data')}}</label>
+                             <div class="cal-icon">
+                                 <input type="text" class="form-control floating datetimepicker"  name="medical_insurance_start_data" >
+                             </div>
+                         </div>
                         <div class="col-6">
-                            <div class="h3 card-title with-switch">
-                                {{__('employee.statue')}}
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="statue" class="onoffswitch-checkbox" id="active_statue"  >
-                                    <label class="onoffswitch-label" for="active_statue">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
+                            <div class="form-focus focused ">
+                                <label >{{__('employee.medical_insurance_end_data')}}</label>
+                                <div class="cal-icon">
+                                    <input type="text" class="form-control floating datetimepicker"  name="medical_insurance_end_data" >
                                 </div>
                             </div>
                         </div>
-
+                        <!---------------------------- insurance block   ----------->
+                        <div class="col-6" style="padding-top: 10px">
+                            <label> {{__('employee.statue')}} </label>
+                            <div class="status-toggle">
+                                <input type="checkbox" id="active_statue_add" class="check" checked="" name="statue">
+                                <label for="active_statue_add" class="checktoggle">checkbox</label>
+                            </div>
+                        </div>
                     </div>
-                    <div class="submit-section">
-                        <button class="btn btn-primary submit-btn" >{{__('general.submit')}}</button>
-                    </div>
-
+                <div class="submit-section">
+                    <button class="btn btn-primary submit-btn" >{{__('general.submit')}}</button>
+                </div>
             </div>
+
             </form>
         </div>
     </div>
 </div>
 <!-- /Add business branch Modal -->
-
-<script>
-
-    function myFunction() {
-        var y = document.getElementById('insurance')
-        if ( y.style.display === "none") {
-            y.style.display = "block";
-        } else {
-            y.style.display = "none";
-        }
-    }
-</script>

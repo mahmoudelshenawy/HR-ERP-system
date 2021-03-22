@@ -17,8 +17,8 @@ return [
     'active_url' => 'The :attribute is not a valid URL.',
     'after' => 'The :attribute must be a date after :date.',
     'after_or_equal' => 'The :attribute must be a date after or equal to :date.',
-    'alpha' => 'The :attribute may only contain letters.',
-    'alpha_dash' => 'The :attribute may only contain letters, numbers, dashes and underscores.',
+    'alpha' => 'يجب أن يحتوي :attribute علي أحرف انجليزيه فقظ  ',
+    'alpha_dash' => ' يجب أن يحتوي :attribute علي أحرف انجليزيه وأرقام و رمز - و رمز _ فقظ ',
     'alpha_num' => 'The :attribute may only contain letters and numbers.',
     'array' => 'The :attribute must be an array.',
     'before' => 'The :attribute must be a date before :date.',
@@ -96,7 +96,7 @@ return [
     'password' => 'The password is incorrect.',
     'present' => 'The :attribute field must be present.',
     'regex' => 'The :attribute format is invalid.',
-    'required' => 'The :attribute field is required.',
+    'required' => 'يجب ادخال  :attribute ',
     'required_if' => 'The :attribute field is required when :other is :value.',
     'required_unless' => 'The :attribute field is required unless :other is in :values.',
     'required_with' => 'The :attribute field is required when :values is present.',
@@ -124,14 +124,24 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may specify custom validation messages for attributes using the
-    | convention "attribute.rule" to name the lines. This makes it quick to
+    | convention "attribute.rule"  to name thelines. This makes it quick to
     | specify a specific custom language line for a given attribute rule.
     |
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'employee_id' => [
+            'required' => 'يجب أدخال اسم الموظف',
+        ],
+    'branch_type' => [
+            'required' => 'يجب أدخال نوع النشاط',
+        ],
+
+        'new_branch' => [
+            'required' => 'يجب أدخال الفرع الجديد المنتقل اليه الموظف',
+        ],
+        'new_job' => [
+            'required' => 'يجب أدخال الوظيفه الجديده في الفرع الجديد',
         ],
     ],
 

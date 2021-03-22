@@ -402,7 +402,7 @@
   var JQUERY_NO_CONFLICT$1 = $.fn[NAME$1];
   var ClassName$1 = {
     ACTIVE: 'active',
-    BUTTON: 'btn',
+    BUTTON: 'datatable_columns',
     FOCUS: 'focus'
   };
   var Selector$1 = {
@@ -410,7 +410,7 @@
     DATA_TOGGLE: '[data-toggle="buttons"]',
     INPUT: 'input:not([type="hidden"])',
     ACTIVE: '.active',
-    BUTTON: '.btn'
+    BUTTON: '.datatable_columns'
   };
   var Event$1 = {
     CLICK_DATA_API: "click" + EVENT_KEY$1 + DATA_API_KEY$1,

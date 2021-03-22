@@ -16,6 +16,7 @@
             <!-- /Page Header -->
 
         <div class="col-md-8 offset-md-2">
+
                 <form method="post" action="{{url('business-setup/business-branch')}}" enctype="multipart/form-data" >
                     @csrf()
                     <div class="avatar-upload" >
@@ -32,8 +33,6 @@
                         <div class="row user-tabs">
                             <div class="col-lg-12 col-md-12 col-sm-12 line-tabs text-center">
                                 <ul class="nav nav-tabs nav-tabs-bottom" >
-                                    <li class="nav-item"><a href="#basic" data-toggle="tab" class="nav-link active">{{__('employee.personal_data')}}</a></li>
-                                    <li class="nav-item"><a href="#attentance_rules" data-toggle="tab" class="nav-link" > {{trans('business-setup.branch_days_time')}} <small class="text-danger">(Admin Only)</small></a></li>
                                 </ul>
                             </div>
                         </div>
@@ -42,21 +41,26 @@
 
                         <div id="basic" class="pro-overview tab-pane fade show active">
                             <div class="row" >
-                                <div class="col-sm-6 ">
+                                <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">{{__('business-setup.branch_business_type')}} <span class="text-danger">*</span></label>
-                                        <select class="select" name="type_id" >
+                                        <label class="col-form-label">{{__('business-setup.branch_business_type')}}
+                                            <span class="text-danger">*</span>
+                                            @error('type_id')<small class="text-danger">{{$message}}</small>@enderror
+                                        </label>
+                                        <select class="js-example-matcher-start" name="type_id" >
                                             <option disabled selected>{{trans('general.select')}}</option>
                                             @foreach($businessType as $type)
-                                                <option  value="{{$type->id}}">{{$type->name}}</option>
+                                                <option  value="{{$type->id}}" {{old('type_id') == $type->id ? 'selected':''}}>{{$type->name}} </option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-6 ">
                                     <div class="form-group">
-                                        <label class="col-form-label">{{__('business-setup.branch')}} <span class="text-danger">*</span></label>
-                                        <input class="form-control" type="text" name="name" >
+                                        <label class="col-form-label">{{__('business-setup.branch')}} <span class="text-danger">*</span>
+                                            @error('name')<small class="text-danger">{{$message}}</small>@enderror
+                                        </label>
+                                        <input class="form-control @error('name') is-invalid @enderror " type="text"  name="name" value="{{old('name')}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -65,33 +69,39 @@
                                         <select class="js-example-matcher-start" name="manager_id">
                                             <option selected value="" disabled>{{trans('employee.select')}}</option>
                                             @foreach($employees as $employee)
-                                                <option  value="{{$employee->id}}">{{$employee->employee_name}}</option>
+                                                <option value="{{$employee->id}}"  {{old('type_id') == $employee->id ? 'selected':''}}>{{$employee->employee_name}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">{{__('business-setup.branch_phone')}}</label>
-                                        <input class="form-control" type="tel" name="phone">
+                                        <label class="col-form-label">{{__('business-setup.branch_phone')}}
+                                            @error('phone')<small class="text-danger">{{$message}}</small>@enderror
+                                        </label>
+                                        <input class="form-control @error('phone') is-invalid @enderror" type="tel" name="phone" value="{{old('phone')}}">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
-                                        <label class="col-form-label">{{__('business-setup.branch_email')}}<span class="text-danger"></span></label>
-                                        <input class="form-control" type="email" name="email">
+                                        <label class="col-form-label">{{__('business-setup.branch_email')}}<span class="text-danger"></span>
+                                            @error('email')<small class="text-danger">{{$message}}</small>@enderror
+                                        </label>
+                                        <input class="form-control @error('phone') is-invalid @enderror" type="email" name="email" value="{{old('email')}}">
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                        <div class="form-group">
-                                            <label class="col-form-label ">{{__('business-setup.Branch Document')}}<span class="text-danger"></span></label>
-                                            <div class="container_file">
-                                                <div class="button-wrap">
-                                                    <label class="button" for="upload">{{trans('business-setup.document_upload')}}</label>
-                                                    <input id="upload" type="file" name="documents">
-                                                </div>
+                                    <div class="form-group">
+                                        <label class="col-form-label ">{{__('business-setup.Branch Document')}}<span class="text-danger"></span>
+                                            @error('documents')<small class="text-danger">{{$message}}</small>@enderror
+                                        </label>
+                                        <div class="container_file">
+                                            <div class="button-wrap">
+                                                <label class="button" for="upload">{{trans('business-setup.document_upload')}}</label>
+                                                <input id="upload" type="file" name="documents">
                                             </div>
                                         </div>
+                                    </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="col-md-8 offset-md-2" >
@@ -120,13 +130,21 @@
                                                 </div>
                                                 <div id="check_time_{{$day}}" style="display: none" class="col-9">
                                                     <div class="row">
-                                                        <div class="col-6">
+                                                        <div class="col-4">
                                                             <label for="">{{trans('employee.check_in')}}</label>
                                                             <input type="time" class="form-control text-success" name="check_in_{{$day}}"/>
                                                         </div>
-                                                        <div class="col-6">
+                                                        <div class="col-4">
                                                             <label for="">{{trans('employee.check_out')}}</label>
                                                             <input type="time" class="form-control text-danger" name="check_out_{{$day}}"/>
+                                                        </div>
+                                                        <div class="col-4">
+                                                            <label for="shift">{{trans('employee.shift')}}</label>
+                                                           <select name="shift" class="form-control" id="shift">
+                                                               <option value="1">{{ trans('employee.first_shift') }}</option>
+                                                               <option value="2">{{ trans('employee.second_shift') }}</option>
+                                                               <option value="2">{{ trans('employee.third_shift') }}</option>
+                                                           </select>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -136,6 +154,8 @@
                                     @endforeach
                            </ul >
                         </div>
+
+
                     </div>
                     <div class="submit-section">
                         <button class="btn btn-primary submit-btn" >{{__('general.submit')}}</button>

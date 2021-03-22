@@ -15,8 +15,13 @@
                         <div class="form-group">
                             <label>{{trans('employee.bank_name')}}</label>
                             <select name="employee_bank_id" class="select2-dropdown js-example-matcher-start form-control" >
+                                @if($employee->bank_id)
+                                <option selected value="{{DB::table('bank_data')->where('id',$employee->bank_id)->value('id')}}">{{DB::table('bank_data')->where('id',$employee->banck_id)->value('name')}}</option>
+                                @else
+                                    <option selected disabled>{{__('employee.select')}}</option>
+                                @endif
                                 @foreach(DB::table('bank_data')->get() as $bank)
-                                        <option selected value="{{$bank->id}}">{{$bank->name}}</option>
+                                        <option  value="{{$bank->id}}">{{$bank->name}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -17,14 +17,18 @@ class CreateEmployeeCostadiesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('employee_id');
             $table->foreign('id')->references('id')->on('employee_general_data')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('custady_type_id');
-            $table->foreign('custady_type_id')->references('id')->on('custody_types')->onDelete('cascade');
-            $table->integer('custady_number')->nullable();
+            $table->unsignedBigInteger('custody_type_id');
+            $table->foreign('custody_type_id')->references('id')->on('custody_types')->onDelete('cascade');
+            $table->string('custody_number')->nullable();
             $table->char('name'   ,50);
-            $table->string('custady_data')->nullable();
-            $table->string('custady_received_date')->nullable();
-            $table->string('custady_expiry_date')->nullable();
+            $table->string('custody_data')->nullable();
+            $table->string('custody_received_date')->nullable();
+            $table->string('custody_checking_date')->nullable();
+            $table->string('custody_insurance_expiry_date')->nullable();
+            $table->string('custody_expiry_form_date')->nullable();
+            $table->string('custody_return_date')->nullable();
             $table->enum('statue',['active','returned','losted','purchased'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

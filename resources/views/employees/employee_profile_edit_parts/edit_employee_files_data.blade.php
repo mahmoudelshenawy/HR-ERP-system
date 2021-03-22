@@ -20,14 +20,7 @@
                             <label class="focus-label">{{__('employee.national_id')}}</label>
                             <input type="number" name="national_id_number" value="{{$employee->national_id_number}}" class="form-control" >
                         </div>
-                       <div class="form-group">
-                           <div class="form-group form-focus focused">
-                               <div class="cal-icon">
-                                   <input type="text" class="form-control floating datetimepicker"  name="birth_date" value={{ $employee->birth_date }} >
-                               </div>
-                               <label class="focus-label">{{__('employee.birth_date')}}</label>
-                           </div>
-                        </div>
+
                         <div class="form-group">
                             <div class="form-group form-focus focused">
                                 <div class="cal-icon">
@@ -202,7 +195,11 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label class="focus-label">{{__('employee.healthy_certificate_number')}}</label>
-                            <input type="number"  name="healthy_certificate_number" class="form-control" value="{{$employee->healthy_certificate_number}}" >
+                            <input type="number"  name="healthy_certificate_number" class="form-control" value="{{$employee->healthy_certificate}}" >
+                        </div>
+                        <div class="form-group">
+                            <label class="focus-label">{{__('employee.healthy_certificate_notice')}}</label>
+                            <input type="text"  name="healthy_certificate_notice" class="form-control" value="{{$employee->healthy_certificate_notice}}" >
                         </div>
                         <div class="form-group">
                             <div class="form-group form-focus focused">

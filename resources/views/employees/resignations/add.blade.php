@@ -16,8 +16,8 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('employee.resignatd_employee')}}<span class="text-danger">*</span></label>
-                                <select class="select " name="employee_id" required>
-                                    @foreach($employees as $employee)
+                                <select class="js-example-matcher-start " name="employee_id" required>
+                                    @foreach(DB::table('employee_general_data')->where('statue','active')->get() as $employee)
                                         <option value="{{$employee->id}}">{{$employee->employee_name}}</option>
                                     @endforeach
                                 </select>

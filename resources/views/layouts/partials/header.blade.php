@@ -5,13 +5,13 @@
 
             <!-- Logo -->
             <div class="header-left">
-                <a href="/home" class="logo">
+                <a href="{{url('/home')}}" class="logo">
                     <img src="{{asset('img/ArSoftware..gif')}}" width="50" height="50" alt="" style=" background-size: cover;border-radius:100% ">
                 </a>
             </div>
             <!-- /Logo -->
 
-            <a id="toggle_btn" href="javascript:void(0);" style="color: white">
+            <a id="toggle_btn" href="javascript:void(0);" >
                 <i class="fa fa-bars " style="color: white"></i>
             </a>
 
@@ -101,6 +101,19 @@
                         <span style="color:#fff;"> Admin</span>
                     </a>
                     <div class="dropdown-menu">
+                        <ul>
+                            <li class="nav-item menu-items">
+                                <a class="nav-link" href="{{ route('logout')}}" onclick="event.preventDefault(); document.getElementById('frm-logout').submit();">
+                                <span class="menu-icon">
+                                    <i class="mdi mdi-speedometer"></i>
+                                </span>
+                                <span class="menu-title">Logout</span>
+                                </a>
+                                <form id="frm-logout" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
+                            </li>
+                        </ul>
 
                     </div>
                 </li>

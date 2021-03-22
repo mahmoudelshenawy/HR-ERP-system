@@ -23,7 +23,7 @@
                         </div>
                     </div>
                 </div>
-                 <div class="card tab-box">
+                 <div class="card tab-box col-10 offset-md-1">
                     <div class="row user-tabs">
                         <div class="col-lg-12 col-md-12 col-sm-12 line-tabs text-center">
                             <ul class="nav nav-tabs nav-tabs-bottom" >

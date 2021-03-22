@@ -1,16 +1,16 @@
 <!-- Delete business type Modal -->
-<div class="modal custom-modal fade" id="delete_user{{$user->id}}" role="dialog">
+<div class="modal custom-modal fade" id="delete_user{{$id}}" role="dialog">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-body">
                 <div class="form-header">
-                    <h3>{{__('general.delete')." ". $user->name}}</h3>
+                    <h3>{{__('general.delete')." ". $name}}</h3>
                     <p>{{__('general.daleteWarning')}}</p>
                 </div>
                 <div class="modal-btn delete-action">
                     <div class="row">
                         <div class="col-6">
-                            <form method="post" action="{{route('users.destroy' , $user->id)}}">
+                            <form method="post" action="{{route('users.destroy' , $id)}}">
                                 @csrf()
                                 @method('delete')
                                 <input name="_method" type="hidden" value="DELETE">

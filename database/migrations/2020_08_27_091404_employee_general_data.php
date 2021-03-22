@@ -50,6 +50,7 @@ class EmployeeGeneralData extends Migration
             $table->char('driving_licence_expiry_date',15)->nullable();
             $table->char('driving_licence_file',100)->nullable();
             $table->char('healthy_certificate',25)->nullable();
+            $table->string('healthy_certificate_notice')->nullable();
             $table->char('healthy_certificate_expiry_date',15)->nullable();
             $table->string('healthy_certificate_file',100)->nullable();
             $table->char('educational_qualification',50)->nullable();
@@ -83,7 +84,7 @@ class EmployeeGeneralData extends Migration
             $table->integer('employee_social_insurance_number')->nullable();
             $table->unsignedBigInteger('bank_id')->nullable();
             $table->foreign('bank_id')->references('id')->on('bank_data')->onDelete('cascade')->cascadeOnUpdate();
-            $table->integer('employee_account_number')->nullable();
+            $table->bigInteger('employee_account_number')->nullable();
             $table->char('employee_bank_account_name',50)->nullable();
             $table->softDeletes();
             $table->timestamps();

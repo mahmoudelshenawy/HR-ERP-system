@@ -47,7 +47,9 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapWebRoutes();
         $this->mapBusinessSetupRoutes();
         $this->mapEmployeeRoutes();
-
+        $this->mapTimeManagementRoutes();
+        $this->mapSalaryRoutes();
+        $this->mapReportRoutes();
         //
     }
 
@@ -81,16 +83,38 @@ class RouteServiceProvider extends ServiceProvider
     }
     protected function mapBusinessSetupRoutes()
     {
-        Route::middleware(['web','auth'])
-            ->namespace($this->namespace.'\BusinessSetup')
+        Route::middleware(['web', 'auth'])
+            ->namespace($this->namespace . '\BusinessSetup')
             ->prefix('business-setup')
             ->group(base_path('routes/businessSetup.php'));
     }
     protected function mapEmployeeRoutes()
     {
-        Route::middleware(['web','auth'])
-            ->namespace($this->namespace.'\Employee')
+        Route::middleware(['web', 'auth'])
+            ->namespace($this->namespace . '\Employee')
             ->prefix('employees')
             ->group(base_path('routes/employee.php'));
+    }
+    protected function mapTimeManagementRoutes()
+    {
+        Route::middleware(['web', 'auth'])
+            ->namespace($this->namespace . '\TimeManagement')
+            ->prefix('time-management')
+            ->group(base_path('routes/time_management.php'));
+    }
+
+    protected function mapSalaryRoutes()
+    {
+        Route::middleware(['web', 'auth'])
+            ->namespace($this->namespace . '\Salary')
+            ->prefix('salary')
+            ->group(base_path('routes/salary.php'));
+    }
+    protected function mapReportRoutes()
+    {
+        Route::middleware(['web', 'auth'])
+            ->namespace($this->namespace . '\Report')
+            ->prefix('reports')
+            ->group(base_path('routes/report.php'));
     }
 }

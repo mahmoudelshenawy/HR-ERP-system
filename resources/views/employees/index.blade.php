@@ -6,9 +6,7 @@
     <div class="page-wrapper">
         <!-- Page Content -->
         <div class="content container-fluid">
-
-        @include('layouts.partials.flash-messages')
-        <!-- Page Header -->
+            <!-- Page Header -->
             <div class="page-header">
                 <div class="row align-items-center">
                     <div class="col">
@@ -18,151 +16,151 @@
                             <li class="breadcrumb-item active">{{__('employee.employees')}}</li>
                         </ul>
                     </div>
+                    <div class="view-icons">
+                        <a href="{{url('employees')}}" class="grid-view btn btn-link active"><i class="fa fa-th"></i></a>
+                        <a href="{{url('employees/list')}}" class="list-view btn btn-link" id="employee_list"><i class="fa fa-bars"></i></a>
+                    </div>
                     <div class="col-auto float-right ml-auto">
                         <a href="#" class="btn add-btn" data-toggle="modal" data-target="#branch_select"><i class="fa fa-plus"></i>
                             {{__('employee.add_employee')}}</a>
                     </div>
+
                 </div>
             </div>
 
             <!-- /Page Header -->
-
-            <!-- Search Filter -->
-            <div class="row filter-row">
-                <div class="col-sm-12 col-md-12">
-                    <div class="form-group form-focus" >
-                        <input type="text" class="form-control floating"  id="mySearchText">
-                        <label class="focus-label">{{__('employee.employees')}}</label>
-                    </div>
+    <!-- Search Filter -->
+        <div class="row filter-row">
+            <div class="col-sm-6 col-md-3">
+                <div class="form-group form-focus">
+                    <input type="text" class="form-control floating" id="code">
+                    <label class="focus-label">{{__('employee.code')}}</label>
                 </div>
             </div>
-            <!-- /Search Filter -->
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="table-responsive" >
-                        <table id="myTable" class="table " >
-                        <thead>
-                        <tr> <th>{{trans('employee.code')}}</th>
-                            <th>{{trans('employee.name')}}</th>
-                            <th>{{trans('employee.branch')}}</th>
-                            <th>{{trans('employee.manager_name')}}</th>
-                            <th>{{trans('employee.guarantor')}}</th>
-                            <th>{{trans('employee.hiring_date')}}</th>
-                            <th>{{trans('employee.country')}}</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @foreach($employeeData as $employee)
-                            <tr>
-                                <td>{{$employee->code}}</td>
-                                <td>
-                                    <h2 class="table-avatar">
-                                        <a href="{{url('employees/'.$employee->id)}}" class="avatar"><img alt="" src="{{($employee->employee_img ? asset('uploads/files/employees/code/'.$employee->code.'/'.$employee->employee_img) : '') }}"></a>
-                                        <a href="{{url('employees/'.$employee->id)}}">  {{$employee->employee_name}}<span style="color: #ff9b44">{{ DB::table('business_jobs')->where('id',$employee->job_id)->value('name') }}  </span>
-                                        <span style="color: #721c24">{{( $employee->phone_1 ? $employee->phone_1 :'')}}</span>
-                                        </a>
-                                    </h2>
-                                </td>
-                                <td class="small text-info">{{ DB::table('business_branches')->find($employee->branch_id)->name }}</td>
-                                <td class="small">@if ($employee->manager_id) {{DB::table('employee_general_data')->where('id','=',$employee->manager_id)->value('employee_name') }}@endif </td>
-                                <td class="small text-dark">@if($employee->guarantor_id) {{DB::table('guarantors')->where('id','=',$employee->guarantor_id)->value('name')}} @endif</td>
-                                <td>
-                                    <h2 class="table-avatar">
-                                        <a>@if($employee->hiring_date) {{$employee->hiring_date}} @endif </a>
-                                        <a><span class="text-danger">@if($employee->contract_ending_date) {{$employee->contract_ending_date}} @endif</span></a>
-
-                                    </h2>
-                                </td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a style="min-width: 120px" href="" class="btn btn-white btn-sm btn-rounded dropdown-toggle border-secondary" data-toggle="dropdown" aria-expanded="false">@if($employee->country_id) {{DB::table('countries')->where('id','=',$employee->country_id)->value('name')}}
-                                            <img src="https://www.countryflags.io/{{DB::table('countries')->where('id',$employee->country_id)->value('img')}}/shiny/16.png">@endif
-                                        </a>
-                                        <div class="dropdown-menu border-success">
-                                            <a class="dropdown-item" href="#"> <span><i class="fa fa-dot-circle-o text-danger"></i>@if($employee->national_id_number)  {{trans('employee.national_id')}}</span>  {{ $employee->national_id_number}} @endif</a>
-                                            <a class="dropdown-item" href="#"><span><i class="fa fa-dot-circle-o text-warning"></i>@if($employee->residency_number) {{trans('employee.residence_number')}}</span>  {{ $employee->residency_number}} @endif</a>
-                                            <a class="dropdown-item" href="#"><span><i class="fa fa-dot-circle-o text-info"></i>@if($employee->passport_number) {{trans('employee.passport_number')}}</span>  {{ $employee->residency_number}} @endif</a>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        @endforeach
-                        </tbody>
-                        </table>
-                    </div>
+            <div class="col-sm-6 col-md-3">
+                <div class="form-group form-focus">
+                    <input type="text" class="form-control floating" id="name">
+                    <label class="focus-label">{{__('employee.name')}}</label>
                 </div>
+            </div>
+            <div class="col-sm-6 col-md-3" data-select2-id="23">
+                <div class="form-group form-focus select-focus focused">
+                    <select class="select" name="branch" id="branch">
+                        <option value="0">{{__('general.all_branches')}}</option>
+                        @foreach(App\BusinessBranch::all() as $branch)
+                            <option value="{{$branch->id}}">{{$branch->name}}</option>
+                        @endforeach
+                    </select>
+                    <label class="focus-label text-muted small">{{__('employee.branch')}}</label>
+
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-3">
+                <a href="#" class="btn btn-success btn-block" id="fillter"> {{__('general.search')}} </a>
             </div>
         </div>
+        <!-- /Search Filter -->
+        <div class="row staff-grid-row" id="employees_section">
+            @if(count($employeeData) > 0)
+                @foreach($employeeData as $employee)
+                    <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3">
+                        <div class="profile-widget">
+                            <div class="profile-img">
+                                <a href="{{url('employees/'.$employee->id)}}" class="avatar"> <img src="@if($employee->employee_img)
+                                    {{asset('uploads/files/employees/code/'.$employee->code.'/'.$employee->employee_img)}}@else
+                                    {{asset('img/user.jpg')}} @endif" style="max-height: 100%;max-width: 100%"></a>
+                            </div>
+                            <div class="dropdown profile-action">
+                                <a class="  btn-rounded border-secondary" >@if($employee->country_id)
+                                        <img src="https://www.countryflags.io/{{DB::table('countries')->where('id',$employee->country_id)->value('img')}}/shiny/16.png">
+                                    @endif
+                                </a>
+                            </div>
+                            <div class="small text-danger">{{$employee->code}}</div>
+                            <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a href="{{url('employees/'.$employee->id)}}" ><span class="text-justify">{{strtolower($employee->employee_name)}}</span></a></h4>
+                            <div class="small text-muted">{{DB::table('business_jobs')->where('id',$employee->job_id)->value('name')}}</div>
+                        </div>
+                    </div>
+                @endforeach
+                <div class="d-flex justify-content-center">
+                    {!! $employeeData->links() !!}
+                </div>
+            @else
+                <div class="col-md-4 col-sm-6 col-12 col-lg-4 col-xl-3 offset-4" style="padding-top: 80px">
+                    <div class="profile-widget">
+                        <div class="profile-img">
+                            <a href="#" class="avatar" onclick="javascript:window.location.reload()"> <img src="{{asset('img/user.jpg')}}" style="max-height: 100%;max-width: 100%"></a>
+                        </div>
+                        <div class="dropdown profile-action">
+                        </div>
+                        <div class="small text-danger">{{0}}</div>
+                        <h4 class="user-name m-t-10 mb-0 text-ellipsis"><a onclick="javascript:window.location.reload()" href="#" ><span class="text-justify">{{__('general.add_new_data')}}</span></a></h4>
+                    </div>
+                </div>
+            @endif
+        </div>
+    </div>
         <!-- /Page Content -->
         @include('employees.employee_add_parts.branch_select')
-    </div>
+</div>
     <!-- /Page Wrapper -->
-
-@endsection
-
-@section('css')
-    <style>
-
-        .active {
-            display: block;
-        }
-    </style>
 
 @endsection
 
 @section('js')
     <script>
-        $(document).ready(function() {
-            $('#myTable').DataTable({
-
-                searchPanes:{
-                    cascadePanes: true,
-                    viewTotal: true,
-                    controls: false,
-                    emptyMessage: "<i><b> {{trans('general.none')}} </b></i>",
-
-                },
-                dom: 'Bfrtip',
-                language:{
-                    searchPanes:{
-                        count: '{total} {{trans('general.employee_found')}}',
-                        countFiltered: '{shown} / {total}',
-                        clearMessage: "{{trans('general.clear_search')}}",
-                        collapse: {0: "{{trans('general.advanced_search')}}", _: 'Search Options (%d)'}
+        $(document).ready(function (){
+            $('#fillter').click(function (e) {
+                e.preventDefault()
+                var branch = $('#branch').val()
+                var name = $('#name').val()
+                var code = $('#code').val()
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var page = $(this).attr('href').split('page=')[1]
+                $.ajax({
+                    url:"/employees?page="+page,
+                    type:"post",
+                    data: {
+                        branch : branch,
+                        name : name,
+                        code : code,
                     },
-                },
-
-                buttons:[
-                    {
-                        extend: 'searchPanes',
-                        className: 'my-btn btn-custom btn',
-                    },
-                    {
-                        text: "{{__('employee.export')}}",
-                        className: 'my-btn btn-warning btn ',
-                        action: function ( e, dt, node, config ) {
-                            window.location.href = "{{url('employees/export-data')}}"
-                        }
-                    },
-                    {
-                        extend: 'colvis',
-                        text: "{{__('general.column_visibility')}}",
-                        columnText: function ( dt, idx, title ) {
-                            return (idx+1)+': '+title;
-                        },
-                        className: 'my-btn btn-secondary btn ',
-                    },
-                ],
-            });
-            oTable = $('#myTable').DataTable();   //pay attention to capital D, which is mandatory to retrieve "api" datatables' object, as @Lionel said
-            $('#mySearchText').keyup(function(){
-                oTable.search($(this).val()).draw() ;
+                    success:function (data) {
+                        $('#employees_section').empty();
+                        $('#employees_section').append(data['html']);
+                    }
+                })
             })
+            $(document).on('click', '.pagination a', function(event){
+                event.preventDefault();
+                var page = $(this).attr('href').split('page=')[1];
+                fetch_data(page);
+            });
+            function fetch_data(page)
+            {
+                var branch = $('#branch').val()
+                var name = $('#name').val()
+                var code = $('#code').val()
+                $.ajax({
+                    url:"/employees?page="+page,
+                    data: {
+                        branch : branch,
+                        name : name,
+                        code : code,
+                    },
+                    success:function(data)
+                    {
+                        $('#employees_section').html(data['html']);
+                    }
+                });
+            }
 
-            $(".my-btn").removeClass( "dt-button" ).addClass( "btn-lg");
-            $('.dt-buttons').insertBefore('div.filter-row').addClass( "btn-group");
+        });
 
-        } );
+
     </script>
-@endsection
+    @endsection

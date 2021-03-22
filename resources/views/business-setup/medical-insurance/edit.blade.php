@@ -1,5 +1,5 @@
 <!-- Edit business branch Modal -->
-<div id="edit_medical_insurance{{$medical->id}}" class="modal custom-modal fade" role="dialog">
+<div id="edit_medical_insurance{{$id}}" class="modal custom-modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,7 +12,7 @@
 
 
             <div class="modal-body">
-                <form method="post" action="{{url('business-setup/medical-insurance-data/'.$medical->id)}}" >
+                <form method="post" action="{{url('business-setup/medical-insurance-data/'.$id)}}" >
                     <input name="_method" type="hidden" value="PUT">
                     @csrf()
                     <div class="row">
@@ -20,25 +20,25 @@
                         <div class="col-sm-6 ">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.medical_insurance_code')}} <span class="text-danger"></span></label>
-                                <input class="form-control" type="text" name="code" value="{{$medical->code}}">
+                                <input class="form-control" type="text" name="code" value="{{$code}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.medical_insurance_name')}}<span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="name" value="{{$medical->name}}">
+                                <input class="form-control" type="text" name="name" value="{{$name}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.medical_insurance_phone')}}<span class="text-danger"></span></label>
-                                <input class="form-control" type="tel" name="phone" value="{{$medical->phone}}">
+                                <input class="form-control" type="tel" name="phone" value="{{$phone}}">
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.medical_insurance_address')}}<span class="text-danger"></span></label>
-                                <input class="form-control" type="text" name="address" value="{{$medical->address}}">
+                                <input class="form-control" type="text" name="address" value="{{$address}}">
                             </div>
                         </div>
 

@@ -6,6 +6,7 @@ use App\BusinessAdministration;
 use App\BusinessBranch;
 use App\BusinessJob;
 use App\BusinessDepartment;
+use App\DataTables\JobsDatatable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -13,25 +14,15 @@ use function GuzzleHttp\Promise\all;
 
 class JobController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+
+    public function index(JobsDatatable $datatable)
     {
-        //
-        $departments = BusinessDepartment::with('administration')->get();
-        $administration = BusinessAdministration::with('businessBranch')->get();
-        $jobs =  BusinessJob::with('department')->get();
-        return view('business-setup.business-job.index',compact(['departments','jobs','administration']));
+
+        return $datatable->render('business-setup.business-job.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function create()
     {
         //

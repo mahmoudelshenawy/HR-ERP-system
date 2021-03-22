@@ -26,5 +26,6 @@ return[
         'October'=>'October',
         'November'=>'November',
         'December'=>'December'
-    ]
+    ],
+    'type_cat'=>['deducted_annual_leave_count','deducted_salary','not_deducted','both_deducted']
 ];

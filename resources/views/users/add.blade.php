@@ -19,8 +19,8 @@
             </div>
         </div>
         <!-- /Page Header -->
-<div class="row">
-    <div class="col-md-11">
+<div class="row" style="margin-top: 50px">
+    <div class="col-md-10 offset-1">
     <form action="{{route('users.store')}}" method="post">
     @csrf
 <div class="row">
@@ -69,6 +69,7 @@
             <label>{{__('user.employee')}} <span class="text-danger"></span></label>
             <?php $allEmployees = \App\EmployeeGeneralData::all(['id' , 'employee_name']) ?>
             <select name="employee_id" class="js-example-matcher-start @error('employee_id') is-invalid @enderror">
+                <option selected disabled>{{__('employee.select')}}</option>
                 @foreach($allEmployees as $employee)
                     <option value="{{$employee->id}}">{{$employee->employee_name}}</option>
                 @endforeach
@@ -88,7 +89,7 @@
                 <th class="text-center">Create</th>
                 <th class="text-center">Update</th>
                 <th class="text-center">Delete</th>
-               
+
             </tr>
         </thead>
         <tbody>

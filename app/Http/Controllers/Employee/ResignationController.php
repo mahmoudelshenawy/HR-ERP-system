@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee;
 
+use App\DataTables\ResignationsDatatable;
 use App\EmployeeGeneralData;
 use App\Http\Controllers\Controller;
 use App\Resignation;
@@ -13,12 +14,9 @@ use Illuminate\Support\Facades\Validator;
 class ResignationController extends Controller
 {
 
-    public function index()
+    public function index(ResignationsDatatable $datatable)
     {
-        $resignations = Resignation::get();
-        $employees = EmployeeGeneralData::where('statue' , 'active')->get();
-        $canceled_resignations = Resignation::onlyTrashed()->get();
-        return view('employees.resignations.index',compact(['resignations','employees','canceled_resignations']));
+        return $datatable->render('employees.resignations.index');
     }
 
 

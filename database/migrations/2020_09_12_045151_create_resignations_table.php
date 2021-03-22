@@ -20,7 +20,7 @@ class CreateResignationsTable extends Migration
             $table->string('date')->nullable();
             $table->string('reason')->nullable();
             $table->enum('statue',['approved','waiting','not_approved'])->default('waiting');
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
             $table->softDeletes();
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee;
 
+use App\DataTables\LoansDatatable;
 use App\EmployeeGeneralData;
 use App\Http\Controllers\Controller;
 use App\Loans;
@@ -17,19 +18,16 @@ class LoansController extends Controller
 
     ];
 }
+
     /**
      * Display a listing of the resource.
      *
+     * @param LoansDatatable $datatable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(LoansDatatable $datatable)
     {
-
-        $loans = Loans::all();
-
-
-        $employees = EmployeeGeneralData::get();
-        return view('employees.loans.index',compact(['loans','employees']));
+        return $datatable->render('employees.loans.index');
     }
 
     /**
@@ -120,10 +118,12 @@ class LoansController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $loan = Loans::find($id);
+        $loan->delete();
+        return redirect()->back()->with('success',__('general.success'));
     }
 }

@@ -13,8 +13,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-group">
-                            <select class="select" name="branch" >
-                                @foreach($branches as $branch)
+                            <select class="js-example-matcher-start" name="branch" >
+                                @foreach(App\BusinessBranch::all() as $branch)
                                     <option  value="{{$branch->id}}">{{$branch->name}}</option>
                                 @endforeach
                             </select>

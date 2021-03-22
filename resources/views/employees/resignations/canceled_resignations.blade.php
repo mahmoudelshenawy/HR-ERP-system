@@ -1,47 +1,55 @@
 
-<div id="canceled_resignation" class="modal custom-modal fade" role="dialog">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">{{__('employee.canceled_resignation')}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="table-responsive">
-                                <table class="table table-danger datatable table-nowrap">
-                                    <thead>
-                                    <tr>
-                                        <th>{{trans('employee.name')}}</th>
-                                        <th>{{__('employee.resignation_date')}}</th>
-                                        <th>{{__('employee.resignation_reason')}}</th>
-                                        <th>{{__('employee.resignation_approved_by')}}</th>
-                                        <th>{{__('general.canceled_at')}}</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($canceled_resignations as $canceled_resignation)
-                                    <tr>
-                                        <td>{{__(DB::table('employee_general_data')->where('id',$canceled_resignation->employee_id)->value('employee_name'))}}</td>
-                                        <td>{{$canceled_resignation->date}}</td>
-                                        <td>{{$canceled_resignation->reason}}</td>
-                                        <td>
-                                       <span class="badge-danger">
-                                           {{$user = Db::table('users')->where('id',$canceled_resignation->created_by)->value('name')}}
-                                       </span>
-                                        </td>
-                                        <td>{{$canceled_resignation->deleted_at}}</td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+@extends('layouts.app')
+
+@section('content')
+
+    <!-- Page Wrapper -->
+    <div class="page-wrapper">
+        <!-- Page Content -->
+        <div class="content container-fluid">
+
+        @include('layouts.partials.flash-messages')
+        <!-- Page Header -->
+            <div class="page-header">
+                <div class="row align-items-center">
+                    <div class="col">
+                        <h3 class="page-title">{{__('employee.resignations')}}</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="{{url('/home')}}">{{__('nav.Dashboard')}}</a></li>
+                            <li class="breadcrumb-item active">{{__('employee.resignations')}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-auto float-right ml-auto">
+                        <a href="#" class="btn add-btn" data-toggle="modal" data-target="#add_resignation"><i class="fa fa-plus"></i>
+                            {{__('employee.new_resignation')}}</a>
+                        <div class="view-icons">
+                            @if(count(App\Resignation::onlyTrashed()->get()) > 0)
+                                <a href="" class="list-view btn btn-link" data-toggle="modal" data-target="#canceled_resignation"><i class="fa fa-trash"></i></a>
+                            @endif
                         </div>
                     </div>
+
                 </div>
+            </div>
+            <!-- /Page Header -->
+
+            <div class="card-body card">
+                <div class="col-md-12 ">
+                    <div class="table-responsive ">
+                        {!!  $dataTable->table(['class'=>' dataTable table-radius table-nowrap table'],true) !!}
+                    </div>
+                </div>
+            </div>
+
+
+
         </div>
+        <!-- /Page Content -->
+        @include('employees.resignations.add')
     </div>
-</div>
+    <!-- /Page Wrapper -->
+@endsection
+@push('scripts')
+    {!! $dataTable->scripts() !!}
+@endpush
+

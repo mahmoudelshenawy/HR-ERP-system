@@ -175,8 +175,8 @@
           });
       };
       DropdownUI.prototype.clear = function () {
-          var $parent = $('.note-btn-group.open');
-          $parent.find('.note-btn.active').removeClass('active');
+          var $parent = $('.note-datatable_columns-group.open');
+          $parent.find('.note-datatable_columns.active').removeClass('active');
           $parent.removeClass('open');
       };
       DropdownUI.prototype.show = function () {
@@ -211,8 +211,8 @@
       return DropdownUI;
   }());
   $(document).on('click', function (e) {
-      if (!$(e.target).closest('.note-btn-group').length) {
-          $('.note-btn-group.open').removeClass('open');
+      if (!$(e.target).closest('.note-datatable_columns-group').length) {
+          $('.note-datatable_columns-group.open').removeClass('open');
       }
   });
   $(document).on('click.note-dropdown-menu', function (e) {
@@ -269,8 +269,8 @@
       '<div class="note-editable" contentEditable="true" role="textbox" aria-multiline="true"/>',
       '<output class="note-status-output" role="status" aria-live="polite"/>'
   ].join(''));
-  var buttonGroup = renderer.create('<div class="note-btn-group">');
-  var button = renderer.create('<button type="button" class="note-btn" role="button" tabindex="-1">', function ($node, options) {
+  var buttonGroup = renderer.create('<div class="note-datatable_columns-group">');
+  var button = renderer.create('<button type="button" class="note-datatable_columns" role="button" tabindex="-1">', function ($node, options) {
       // set button type
       if (options && options.tooltip) {
           $node.attr({
@@ -476,7 +476,7 @@
               var color = colors[col];
               var colorName = colorsName[col];
               buttons.push([
-                  '<button type="button" class="note-btn note-color-btn"',
+                  '<button type="button" class="note-datatable_columns note-color-datatable_columns"',
                   'style="background-color:', color, '" ',
                   'data-event="', eventName, '" ',
                   'data-value="', color, '" ',
@@ -488,7 +488,7 @@
           contents.push('<div class="note-color-row">' + buttons.join('') + '</div>');
       }
       $node.html(contents.join(''));
-      $node.find('.note-color-btn').each(function () {
+      $node.find('.note-color-datatable_columns').each(function () {
           $(this).data('_lite_tooltip', new TooltipUI($(this), {
               container: options.container
           }));
@@ -522,34 +522,34 @@
               dropdown({
                   items: [
                       '<div>',
-                      '<div class="note-btn-group btn-background-color">',
+                      '<div class="note-datatable_columns-group datatable_columns-background-color">',
                       '  <div class="note-palette-title">' + opt.lang.color.background + '</div>',
                       '  <div>',
-                      '<button type="button" class="note-color-reset note-btn note-btn-block" ' +
+                      '<button type="button" class="note-color-reset note-datatable_columns note-datatable_columns-block" ' +
                           ' data-event="backColor" data-value="inherit">',
                       opt.lang.color.transparent,
                       '    </button>',
                       '  </div>',
                       '  <div class="note-holder" data-event="backColor"/>',
-                      '  <div class="btn-sm">',
-                      '    <input type="color" id="html5bcp" class="note-btn btn-default" value="#21104A" style="width:100%;" data-value="cp">',
-                      '    <button type="button" class="note-color-reset btn" data-event="backColor" data-value="cpbackColor">',
+                      '  <div class="datatable_columns-sm">',
+                      '    <input type="color" id="html5bcp" class="note-datatable_columns datatable_columns-default" value="#21104A" style="width:100%;" data-value="cp">',
+                      '    <button type="button" class="note-color-reset datatable_columns" data-event="backColor" data-value="cpbackColor">',
                       opt.lang.color.cpSelect,
                       '    </button>',
                       '  </div>',
                       '</div>',
-                      '<div class="note-btn-group btn-foreground-color">',
+                      '<div class="note-datatable_columns-group datatable_columns-foreground-color">',
                       '  <div class="note-palette-title">' + opt.lang.color.foreground + '</div>',
                       '  <div>',
-                      '<button type="button" class="note-color-reset note-btn note-btn-block" ' +
+                      '<button type="button" class="note-color-reset note-datatable_columns note-datatable_columns-block" ' +
                           ' data-event="removeFormat" data-value="foreColor">',
                       opt.lang.color.resetToDefault,
                       '    </button>',
                       '  </div>',
                       '  <div class="note-holder" data-event="foreColor"/>',
-                      '  <div class="btn-sm">',
-                      '    <input type="color" id="html5fcp" class="note-btn btn-default" value="#21104A" style="width:100%;" data-value="cp">',
-                      '    <button type="button" class="note-color-reset btn" data-event="foreColor" data-value="cpforeColor">',
+                      '  <div class="datatable_columns-sm">',
+                      '    <input type="color" id="html5fcp" class="note-datatable_columns datatable_columns-default" value="#21104A" style="width:100%;" data-value="cp">',
+                      '    <button type="button" class="note-color-reset datatable_columns" data-event="foreColor" data-value="cpforeColor">',
                       opt.lang.color.cpSelect,
                       '    </button>',
                       '  </div>',
@@ -565,11 +565,11 @@
                           }).render());
                       });
                       if (type === 'fore') {
-                          $dropdown.find('.btn-background-color').hide();
+                          $dropdown.find('.datatable_columns-background-color').hide();
                           $dropdown.css({ 'min-width': '210px' });
                       }
                       else if (type === 'back') {
-                          $dropdown.find('.btn-foreground-color').hide();
+                          $dropdown.find('.datatable_columns-foreground-color').hide();
                           $dropdown.css({ 'min-width': '210px' });
                       }
                   },
@@ -639,7 +639,7 @@
           '<input class="note-video-url note-input" type="text" />' +
           '</div>';
       var footer = [
-          '<button type="button" href="#" class="note-btn note-btn-primary note-video-btn disabled" disabled>',
+          '<button type="button" href="#" class="note-datatable_columns note-datatable_columns-primary note-video-datatable_columns disabled" disabled>',
           opt.lang.video.insert,
           '</button>'
       ].join('');
@@ -661,7 +661,7 @@
           '<input class="note-image-url note-input" type="text" />' +
           '</div>';
       var footer = [
-          '<button href="#" type="button" class="note-btn note-btn-primary note-btn-large note-image-btn disabled" disabled>',
+          '<button href="#" type="button" class="note-datatable_columns note-datatable_columns-primary note-datatable_columns-large note-image-datatable_columns disabled" disabled>',
           opt.lang.image.insert,
           '</button>'
       ].join('');
@@ -686,7 +686,7 @@
                   '<label>' + '<input type="checkbox" checked> ' + opt.lang.link.openInNewWindow + '</label>' +
                   '</div>' : '');
       var footer = [
-          '<button href="#" type="button" class="note-btn note-btn-primary note-link-btn disabled" disabled>',
+          '<button href="#" type="button" class="note-datatable_columns note-datatable_columns-primary note-link-datatable_columns disabled" disabled>',
           opt.lang.link.insert,
           '</button>'
       ].join('');
@@ -5824,16 +5824,16 @@
                           '<div class="note-palette">',
                           '  <div class="note-palette-title">' + this.lang.color.background + '</div>',
                           '  <div>',
-                          '    <button type="button" class="note-color-reset btn btn-light" data-event="backColor" data-value="inherit">',
+                          '    <button type="button" class="note-color-reset datatable_columns datatable_columns-light" data-event="backColor" data-value="inherit">',
                           this.lang.color.transparent,
                           '    </button>',
                           '  </div>',
                           '  <div class="note-holder" data-event="backColor"/>',
                           '  <div>',
-                          '    <button type="button" class="note-color-select btn" data-event="openPalette" data-value="backColorPicker">',
+                          '    <button type="button" class="note-color-select datatable_columns" data-event="openPalette" data-value="backColorPicker">',
                           this.lang.color.cpSelect,
                           '    </button>',
-                          '    <input type="color" id="backColorPicker" class="note-btn note-color-select-btn" value="#FFFF00" data-event="backColorPalette">',
+                          '    <input type="color" id="backColorPicker" class="note-datatable_columns note-color-select-datatable_columns" value="#FFFF00" data-event="backColorPalette">',
                           '  </div>',
                           '  <div class="note-holder-custom" id="backColorPalette" data-event="backColor"/>',
                           '</div>'
@@ -5842,16 +5842,16 @@
                               '<div class="note-palette">',
                               '  <div class="note-palette-title">' + this.lang.color.foreground + '</div>',
                               '  <div>',
-                              '    <button type="button" class="note-color-reset btn btn-light" data-event="removeFormat" data-value="foreColor">',
+                              '    <button type="button" class="note-color-reset datatable_columns datatable_columns-light" data-event="removeFormat" data-value="foreColor">',
                               this.lang.color.resetToDefault,
                               '    </button>',
                               '  </div>',
                               '  <div class="note-holder" data-event="foreColor"/>',
                               '  <div>',
-                              '    <button type="button" class="note-color-select btn" data-event="openPalette" data-value="foreColorPicker">',
+                              '    <button type="button" class="note-color-select datatable_columns" data-event="openPalette" data-value="foreColorPicker">',
                               this.lang.color.cpSelect,
                               '    </button>',
-                              '    <input type="color" id="foreColorPicker" class="note-btn note-color-select-btn" value="#000000" data-event="foreColorPalette">',
+                              '    <input type="color" id="foreColorPicker" class="note-datatable_columns note-color-select-datatable_columns" value="#000000" data-event="foreColorPalette">',
                               '  <div class="note-holder-custom" id="foreColorPalette" data-event="foreColor"/>',
                               '</div>'
                           ].join('') : ''),
@@ -5882,7 +5882,7 @@
                           });
                           $dropdown.find('input[type=color]').each(function (idx, item) {
                               $$1(item).change(function () {
-                                  var $chip = $dropdown.find('#' + $$1(this).data('event')).find('.note-color-btn').first();
+                                  var $chip = $dropdown.find('#' + $$1(this).data('event')).find('.note-color-datatable_columns').first();
                                   var color = this.value.toUpperCase();
                                   $chip.css('background-color', color)
                                       .attr('aria-label', color)
@@ -5902,7 +5902,7 @@
                               var $picker = $parent.find('#' + value);
                               var $palette = $$1($parent.find('#' + $picker.data('event')).find('.note-color-row')[0]);
                               // Shift palette chips
-                              var $chip = $palette.find('.note-color-btn').last().detach();
+                              var $chip = $palette.find('.note-color-datatable_columns').last().detach();
                               // Set chip attributes
                               var color = $picker.val();
                               $chip.css('background-color', color)
@@ -5959,7 +5959,7 @@
               var item = this_1.options.styleTags[styleIdx];
               this_1.context.memo('button.style.' + item, function () {
                   return _this.button({
-                      className: 'note-btn-style-' + item,
+                      className: 'note-datatable_columns-style-' + item,
                       contents: '<div data-value="' + item + '">' + item.toUpperCase() + '</div>',
                       tooltip: _this.lang.style[item],
                       click: _this.context.createInvokeHandler('editor.formatBlock')
@@ -5972,7 +5972,7 @@
           }
           this.context.memo('button.bold', function () {
               return _this.button({
-                  className: 'note-btn-bold',
+                  className: 'note-datatable_columns-bold',
                   contents: _this.ui.icon(_this.options.icons.bold),
                   tooltip: _this.lang.font.bold + _this.representShortcut('bold'),
                   click: _this.context.createInvokeHandlerAndUpdateState('editor.bold')
@@ -5980,7 +5980,7 @@
           });
           this.context.memo('button.italic', function () {
               return _this.button({
-                  className: 'note-btn-italic',
+                  className: 'note-datatable_columns-italic',
                   contents: _this.ui.icon(_this.options.icons.italic),
                   tooltip: _this.lang.font.italic + _this.representShortcut('italic'),
                   click: _this.context.createInvokeHandlerAndUpdateState('editor.italic')
@@ -5988,7 +5988,7 @@
           });
           this.context.memo('button.underline', function () {
               return _this.button({
-                  className: 'note-btn-underline',
+                  className: 'note-datatable_columns-underline',
                   contents: _this.ui.icon(_this.options.icons.underline),
                   tooltip: _this.lang.font.underline + _this.representShortcut('underline'),
                   click: _this.context.createInvokeHandlerAndUpdateState('editor.underline')
@@ -6003,7 +6003,7 @@
           });
           this.context.memo('button.strikethrough', function () {
               return _this.button({
-                  className: 'note-btn-strikethrough',
+                  className: 'note-datatable_columns-strikethrough',
                   contents: _this.ui.icon(_this.options.icons.strikethrough),
                   tooltip: _this.lang.font.strikethrough + _this.representShortcut('strikethrough'),
                   click: _this.context.createInvokeHandlerAndUpdateState('editor.strikethrough')
@@ -6011,7 +6011,7 @@
           });
           this.context.memo('button.superscript', function () {
               return _this.button({
-                  className: 'note-btn-superscript',
+                  className: 'note-datatable_columns-superscript',
                   contents: _this.ui.icon(_this.options.icons.superscript),
                   tooltip: _this.lang.font.superscript,
                   click: _this.context.createInvokeHandlerAndUpdateState('editor.superscript')
@@ -6019,7 +6019,7 @@
           });
           this.context.memo('button.subscript', function () {
               return _this.button({
-                  className: 'note-btn-subscript',
+                  className: 'note-datatable_columns-subscript',
                   contents: _this.ui.icon(_this.options.icons.subscript),
                   tooltip: _this.lang.font.subscript,
                   click: _this.context.createInvokeHandlerAndUpdateState('editor.subscript')
@@ -6239,7 +6239,7 @@
           });
           this.context.memo('button.fullscreen', function () {
               return _this.button({
-                  className: 'btn-fullscreen',
+                  className: 'datatable_columns-fullscreen',
                   contents: _this.ui.icon(_this.options.icons.arrowsAlt),
                   tooltip: _this.lang.options.fullscreen,
                   click: _this.context.createInvokeHandler('fullscreen.toggle')
@@ -6247,7 +6247,7 @@
           });
           this.context.memo('button.codeview', function () {
               return _this.button({
-                  className: 'btn-codeview',
+                  className: 'datatable_columns-codeview',
                   contents: _this.ui.icon(_this.options.icons.code),
                   tooltip: _this.lang.options.codeview,
                   click: _this.context.createInvokeHandler('codeview.toggle')
@@ -6364,7 +6364,7 @@
           var _this = this;
           this.context.memo('button.addRowUp', function () {
               return _this.button({
-                  className: 'btn-md',
+                  className: 'datatable_columns-md',
                   contents: _this.ui.icon(_this.options.icons.rowAbove),
                   tooltip: _this.lang.table.addRowAbove,
                   click: _this.context.createInvokeHandler('editor.addRow', 'top')
@@ -6372,7 +6372,7 @@
           });
           this.context.memo('button.addRowDown', function () {
               return _this.button({
-                  className: 'btn-md',
+                  className: 'datatable_columns-md',
                   contents: _this.ui.icon(_this.options.icons.rowBelow),
                   tooltip: _this.lang.table.addRowBelow,
                   click: _this.context.createInvokeHandler('editor.addRow', 'bottom')
@@ -6380,7 +6380,7 @@
           });
           this.context.memo('button.addColLeft', function () {
               return _this.button({
-                  className: 'btn-md',
+                  className: 'datatable_columns-md',
                   contents: _this.ui.icon(_this.options.icons.colBefore),
                   tooltip: _this.lang.table.addColLeft,
                   click: _this.context.createInvokeHandler('editor.addCol', 'left')
@@ -6388,7 +6388,7 @@
           });
           this.context.memo('button.addColRight', function () {
               return _this.button({
-                  className: 'btn-md',
+                  className: 'datatable_columns-md',
                   contents: _this.ui.icon(_this.options.icons.colAfter),
                   tooltip: _this.lang.table.addColRight,
                   click: _this.context.createInvokeHandler('editor.addCol', 'right')
@@ -6396,7 +6396,7 @@
           });
           this.context.memo('button.deleteRow', function () {
               return _this.button({
-                  className: 'btn-md',
+                  className: 'datatable_columns-md',
                   contents: _this.ui.icon(_this.options.icons.rowRemove),
                   tooltip: _this.lang.table.delRow,
                   click: _this.context.createInvokeHandler('editor.deleteRow')
@@ -6404,7 +6404,7 @@
           });
           this.context.memo('button.deleteCol', function () {
               return _this.button({
-                  className: 'btn-md',
+                  className: 'datatable_columns-md',
                   contents: _this.ui.icon(_this.options.icons.colRemove),
                   tooltip: _this.lang.table.delCol,
                   click: _this.context.createInvokeHandler('editor.deleteCol')
@@ -6412,7 +6412,7 @@
           });
           this.context.memo('button.deleteTable', function () {
               return _this.button({
-                  className: 'btn-md',
+                  className: 'datatable_columns-md',
                   contents: _this.ui.icon(_this.options.icons.trash),
                   tooltip: _this.lang.table.delTable,
                   click: _this.context.createInvokeHandler('editor.deleteTable')
@@ -6631,11 +6631,11 @@
           }
       };
       Toolbar.prototype.updateFullscreen = function (isFullscreen) {
-          this.ui.toggleBtnActive(this.$toolbar.find('.btn-fullscreen'), isFullscreen);
+          this.ui.toggleBtnActive(this.$toolbar.find('.datatable_columns-fullscreen'), isFullscreen);
           this.changeContainer(isFullscreen);
       };
       Toolbar.prototype.updateCodeview = function (isCodeview) {
-          this.ui.toggleBtnActive(this.$toolbar.find('.btn-codeview'), isCodeview);
+          this.ui.toggleBtnActive(this.$toolbar.find('.datatable_columns-codeview'), isCodeview);
           if (isCodeview) {
               this.deactivate();
           }
@@ -6646,14 +6646,14 @@
       Toolbar.prototype.activate = function (isIncludeCodeview) {
           var $btn = this.$toolbar.find('button');
           if (!isIncludeCodeview) {
-              $btn = $btn.not('.btn-codeview');
+              $btn = $btn.not('.datatable_columns-codeview');
           }
           this.ui.toggleBtn($btn, true);
       };
       Toolbar.prototype.deactivate = function (isIncludeCodeview) {
           var $btn = this.$toolbar.find('button');
           if (!isIncludeCodeview) {
-              $btn = $btn.not('.btn-codeview');
+              $btn = $btn.not('.datatable_columns-codeview');
           }
           this.ui.toggleBtn($btn, false);
       };
@@ -6689,7 +6689,7 @@
                   }).render()).html()
                   : ''
           ].join('');
-          var buttonClass = 'btn btn-primary note-btn note-btn-primary note-link-btn';
+          var buttonClass = 'datatable_columns datatable_columns-primary note-datatable_columns note-datatable_columns-primary note-link-datatable_columns';
           var footer = "<input type=\"button\" href=\"#\" class=\"" + buttonClass + "\" value=\"" + this.lang.link.insert + "\" disabled>";
           this.$dialog = this.ui.dialog({
               className: 'link-dialog',
@@ -6728,7 +6728,7 @@
           return $$1.Deferred(function (deferred) {
               var $linkText = _this.$dialog.find('.note-link-text');
               var $linkUrl = _this.$dialog.find('.note-link-url');
-              var $linkBtn = _this.$dialog.find('.note-link-btn');
+              var $linkBtn = _this.$dialog.find('.note-link-datatable_columns');
               var $openInNewWindow = _this.$dialog
                   .find('.sn-checkbox-open-in-new-window input[type=checkbox]');
               _this.ui.onDialogShown(_this.$dialog, function () {
@@ -6898,7 +6898,7 @@
               ' col-md-12" type="text" />',
               '</div>'
           ].join('');
-          var buttonClass = 'btn btn-primary note-btn note-btn-primary note-image-btn';
+          var buttonClass = 'datatable_columns datatable_columns-primary note-datatable_columns note-datatable_columns-primary note-image-datatable_columns';
           var footer = "<input type=\"button\" href=\"#\" class=\"" + buttonClass + "\" value=\"" + this.lang.image.insert + "\" disabled>";
           this.$dialog = this.ui.dialog({
               title: this.lang.image.insert,
@@ -6960,7 +6960,7 @@
           return $$1.Deferred(function (deferred) {
               var $imageInput = _this.$dialog.find('.note-image-input');
               var $imageUrl = _this.$dialog.find('.note-image-url');
-              var $imageBtn = _this.$dialog.find('.note-image-btn');
+              var $imageBtn = _this.$dialog.find('.note-image-datatable_columns');
               _this.ui.onDialogShown(_this.$dialog, function () {
                   _this.context.triggerEvent('dialog.shown');
                   // Cloning imageInput to clear element.
@@ -7121,7 +7121,7 @@
               '<input class="note-video-url form-control note-form-control note-input" type="text" />',
               '</div>'
           ].join('');
-          var buttonClass = 'btn btn-primary note-btn note-btn-primary note-video-btn';
+          var buttonClass = 'datatable_columns datatable_columns-primary note-datatable_columns note-datatable_columns-primary note-video-datatable_columns';
           var footer = "<input type=\"button\" href=\"#\" class=\"" + buttonClass + "\" value=\"" + this.lang.video.insert + "\" disabled>";
           this.$dialog = this.ui.dialog({
               title: this.lang.video.insert,
@@ -7266,7 +7266,7 @@
           var _this = this;
           return $$1.Deferred(function (deferred) {
               var $videoUrl = _this.$dialog.find('.note-video-url');
-              var $videoBtn = _this.$dialog.find('.note-video-btn');
+              var $videoBtn = _this.$dialog.find('.note-video-datatable_columns');
               _this.ui.onDialogShown(_this.$dialog, function () {
                   _this.context.triggerEvent('dialog.shown');
                   $videoUrl.val(text).on('input', function () {

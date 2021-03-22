@@ -16,8 +16,8 @@
                         <div class="col-sm-6 ">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.branch')}} <span class="text-danger">*</span></label>
-                                <select class="select" name="branchName[]" multiple>
-                                    @foreach($branchs as $branch)
+                                <select class="js-example-matcher-start" name="branchName[]" multiple>
+                                    @foreach( \App\BusinessBranch::all() as $branch)
                                       <option  value="{{$branch->id}}">{{$branch->name}}</option>
                                     @endforeach
                                 </select>

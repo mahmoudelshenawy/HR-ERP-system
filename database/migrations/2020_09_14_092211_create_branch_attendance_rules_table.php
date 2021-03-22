@@ -20,6 +20,7 @@ class CreateBranchAttendanceRulesTable extends Migration
             $table->string('day')->nullable();
             $table->time('check_in')->nullable();
             $table->time('check_out')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

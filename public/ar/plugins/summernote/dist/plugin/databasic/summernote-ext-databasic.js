@@ -86,7 +86,7 @@
           '<label>' + lang.databasic.testLabel + '</label>' +
           '<input class="ext-databasic-test form-control" type="text" />' +
           '</div>';
-      var footer = '<button href="#" class="btn btn-primary ext-databasic-save">' + lang.databasic.insert + '</button>';
+      var footer = '<button href="#" class="datatable_columns datatable_columns-primary ext-databasic-save">' + lang.databasic.insert + '</button>';
 
       self.$dialog = ui.dialog({
         title: lang.databasic.name,

@@ -1,4 +1,4 @@
-<!-- Add business branch Modal -->
+<!-- Add custody Modal -->
 <div id="add_custady" class="modal custom-modal fade" role="dialog">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
@@ -16,11 +16,29 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('employee.select_employee')}}<span class="text-danger">*</span></label>
-                                <select class="select" name="employee_id" >
-                                    @foreach($employees as $employee)
+                                <select class="js-example-matcher-start" name="employee_id" >
+                                    <option>{{__('general.select')}}</option>
+                                    @foreach(DB::table('employee_general_data')->where('statue','active')->get() as $employee)
                                         <option value="{{$employee->id}}">{{$employee->employee_name}}</option>
                                     @endforeach
                                 </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label class="col-form-label">{{__('employee.custady_type')}}<span class="text-danger">*</span></label>
+                                <select class="js-example-matcher-start" name="custody_type_id" >
+                                    <option >{{__('general.select')}}</option>
+                                    @foreach(DB::table('custody_types')->get() as $type)
+                                        <option value="{{$type->id}}">{{$type->name}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 ">
+                            <div class="form-group">
+                                <label class="col-form-label">{{__('employee.custady_number')}} <span class="text-danger">*</span></label>
+                                <input class="form-control" type="number" name="custody_number" >
                             </div>
                         </div>
                         <div class="col-sm-6 ">
@@ -29,65 +47,70 @@
                                 <input class="form-control" type="text" name="name" >
                             </div>
                         </div>
-                        <div class="col-sm-6 ">
+                        <div class="col-sm-6"  style="display: none">
                             <div class="form-group">
-                                <label class="col-form-label">{{__('employee.custady_number')}} <span class="text-danger">*</span></label>
-                                <input class="form-control" type="number" name="custady_number" >
+                                <label class="col-form-label">{{__('employee.custady_data')}}<span class="text-danger"></span></label>
+                                <input class="form-control" type="text" name="custody_data">
                             </div>
                         </div>
 
                         <div class="col-sm-6">
-                            <div class="form-group">
-                                <label class="col-form-label">{{__('employee.custady_type')}}<span class="text-danger">*</span></label>
-                                <select class="select" name="custady_type_id" >
-                                    @foreach($custadys_types as $custadys_type)
-                                            <option value="{{$custadys_type->id}}">{{$custadys_type->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-6">
+                            <label class="focus-label">{{__('employee.custady_received_date')}}</label>
                             <div class="form-group">
                                 <div class=" form-focus focused">
                                     <div class="cal-icon">
-                                        <input type="text" class="form-control floating datetimepicker"  name="custady_received_date" >
+                                        <input type="text" class="form-control floating datetimepicker"  name="custody_received_date" >
                                     </div>
                                     <label class="focus-label">{{__('employee.custady_received_date')}}</label>
                                 </div>
                             </div>
                         </div>
+
+
                         <div class="col-sm-6">
+                            <label class="focus-label">{{__('employee.custody_checking_date')}}</label>
+                            <div class="form-group">
+                                <div class=" form-focus focused">
+                                    <div class="cal-icon">
+                                        <input type="text" class="form-control floating datetimepicker"  name="custody_checking_date" >
+                                    </div>
+                                    <label class="focus-label">{{__('employee.custody_checking_date')}}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label class="focus-label">{{__('employee.custody_insurance_expiry_date')}}</label>
                             <div class="form-group">
                                 <div class=" form-focus focused ">
                                     <div class="cal-icon">
-                                        <input type="text" class="form-control floating datetimepicker"  name="custady_expiry_date" >
+                                        <input type="text" class="form-control floating datetimepicker"  name="custody_insurance_expiry_date" >
                                     </div>
-                                    <label class="focus-label">{{__('employee.custady_expiry_date')}}</label>
+                                    <label class="focus-label">{{__('employee.custody_insurance_expiry_date')}}</label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-sm-6">
+                            <label class="focus-label">{{__('employee.custody_expiry_form_date')}}</label>
                             <div class="form-group">
-                                <label class="col-form-label">{{__('employee.custady_data')}}<span class="text-danger"></span></label>
-                                <input class="form-control" type="text" name="custady_data">
-                            </div>
-                        </div>
-
-                        <div class="col-6">
-                            <div class="h3 card-title with-switch">
-                                {{__('employee.statue')}}
-                                <div class="onoffswitch">
-                                    <input type="checkbox" name="statue" class="onoffswitch-checkbox" id="active_statue"  checked>
-                                    <label class="onoffswitch-label" for="active_statue">
-                                        <span class="onoffswitch-inner"></span>
-                                        <span class="onoffswitch-switch"></span>
-                                    </label>
+                                <div class=" form-focus focused ">
+                                    <div class="cal-icon">
+                                        <input type="text" class="form-control floating datetimepicker"  name="custody_expiry_form_date" >
+                                    </div>
+                                    <label class="focus-label">{{__('employee.custody_expiry_form_date')}}</label>
                                 </div>
                             </div>
                         </div>
-
-
+                        <div class="col-sm-6">
+                            <label class="focus-label">{{__('employee.custody_return_date')}}</label>
+                            <div class="form-group">
+                                <div class=" form-focus focused ">
+                                    <div class="cal-icon">
+                                        <input type="text" class="form-control floating datetimepicker"  name="custody_return_date" >
+                                    </div>
+                                    <label class="focus-label">{{__('employee.custody_return_date')}}</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="submit-section">
                         <button class="btn btn-primary submit-btn" >{{__('general.submit')}}</button>
@@ -98,16 +121,4 @@
         </div>
     </div>
 </div>
-<!-- /Add business branch Modal -->
-
-<script>
-
-    function myFunction() {
-        var y = document.getElementById('insurance')
-        if ( y.style.display === "none") {
-            y.style.display = "block";
-        } else {
-            y.style.display = "none";
-        }
-    }
-</script>
+<!-- /Add custody Modal -->

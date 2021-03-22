@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BusinessSetup;
 
 use App\BankData;
+use App\DataTables\BanksDatatable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -25,11 +26,9 @@ class BankController extends Controller
     }
 
 
-    public function index()
+    public function index(BanksDatatable $datatable)
     {
-        //
-        $banks = BankData::get();
-        return view('business-setup.bank-data.index',compact(['banks']));
+      return $datatable->render('business-setup.bank-data.index');
     }
 
     /**

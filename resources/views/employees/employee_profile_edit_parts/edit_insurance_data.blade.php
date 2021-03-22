@@ -94,7 +94,7 @@
                      <div class="row">
                             <div class="col-md-12">
                                 <div class="h3 card-title with-switch">
-                                    {{trans('employee.insurance_statue')}}
+                                    {{trans('employee.employee_social_insurance_statue')}}
                                     <div class="onoffswitch">
                                         <input type="checkbox" name="employee_social_insurance_statue" class="onoffswitch-checkbox"
                                                {{($employee->employee_social_insurance_statue == 1)?  "checked" :  '' }}

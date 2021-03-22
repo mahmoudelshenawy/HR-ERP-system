@@ -3,10 +3,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
-        <meta name="description" content="Smarthr - Bootstrap Admin Template">
+        <meta name="description" content="Arabian HR - Human Resource Management System">
 		<meta name="keywords" content="admin, estimates, bootstrap, business, corporate, creative, management, minimal, modern, accounts, invoice, html5, responsive, CRM, Projects">
-        <meta name="author" content="Dreamguys - Bootstrap Admin Template">
+        <meta name="author" content="Arabian Software Co">
         <meta name="robots" content="noindex, nofollow">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>{{env('APP_NAME')}}</title>
 
 		<!-- Favicon -->
@@ -41,6 +42,9 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/searchpanes/1.1.1/css/searchPanes.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/select/1.3.1/css/select.dataTables.min.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.6/css/responsive.bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/searchbuilder/1.0.0/css/searchBuilder.dataTables.min.css">
         <link rel="stylesheet" href="{{asset(App::getLocale().'/css/dataTables.bootstrap4.min.css')}}">
 
 		<!-- Chart CSS -->
@@ -65,16 +69,6 @@
             .select2-container{
                 min-height: 44px; !important;
             }
-            #sidebar-menu  a {
-                color: #b7c0cd;
-            }
-            #sidebar-menu a:hover {
-                color: black;
-            }
-           #myTable_filter{
-               display: none;
-           }
-
         </style>
 
     </head>

@@ -1,0 +1,33 @@
+<?php
+
+return [
+    'over_time' => 'مرتب إضافي',
+    'over_time_amount' => 'قيمه المبلغ الإضافي',
+    'administration' => 'الإدارة',
+    'branch' => 'الفرع',
+    'commission' => 'العمولة',
+    'commission_amount' => 'قيمة العمولة',
+    'allowances' => 'العلاوات',
+    'allowance' => 'العلاوة',
+    'allowance_amount' => 'قيمة العلاوة',
+    'advance' => 'السلف',
+    'advance_amount' => 'قيمة السلف',
+    'absence_delay_penalties' => 'خصم التأخير و الغياب',
+    'absence_subtract' => 'خصم الغياب',
+    'delay_subtract' => 'خصم التأخير',
+    'month'  => "الشهر",
+    'calculate_salarries' => 'حساب المرتبات',
+    'calculate_net_salary' => 'حساب مرتبات الموظفين',
+    'salaries_not_calculated' => 'لم يتم حساب مرتبات الموظفين بعد من فضلك قم بإختيار الشهر',
+    'basic_salary' => 'الراتب الاساسي',
+    'variable_salary' => 'الراتب المتغير',
+    'overtime' => 'وقت اضافي',
+    'allowance' => 'العلاوة',
+    'advance' => 'السلف',
+    'commission' => 'العمولة',
+    'delay_penalty' => 'جزاء التأخير',
+    'absence_penalty' => 'جزاء الغياب',
+    'employee_allowance' => 'بدلات اخري',
+    'employee_deduction' => 'الاستقطاعات الاخري',
+    'net_salary' => 'صافي المرتب'
+];

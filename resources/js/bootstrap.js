@@ -1,10 +1,6 @@
 window._ = require('lodash');
 
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
+
 
 require('bootstrap');
 require('datatables.net-bs4');
@@ -44,4 +40,10 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     key: process.env.MIX_PUSHER_APP_KEY,
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
+// });
+// const Vue = require('vue');
+
+// Vue.config.productionTip = false;
+
+// var  app = new Vue({
 // });

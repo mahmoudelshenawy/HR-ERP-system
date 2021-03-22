@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\DataTables\UsersDataTables;
 use App\EmployeeGeneralData;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -10,11 +11,11 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
 
-    public function index()
+    public function index(UsersDataTables $dataTables)
     {
-        $users = User::all();
         $employees = EmployeeGeneralData::all();
-        return view('users.index', compact(['users', 'employees']));
+        $users = User::all();
+        return $dataTables->render('users.index',compact('employees','users'));
     }
 
     public function create()

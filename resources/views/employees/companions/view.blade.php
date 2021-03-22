@@ -28,7 +28,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('employee.relative_relation')}}<span class="text-danger"></span></label>
-                                <select class="select" name="relative_relation" >
+                                <select class="js-example-matcher-start" name="relative_relation" >
                                     <option selected disabled value="{{$companion->relative_relation}}">{{$companion->relative_relation}}</option>
 
                                 </select>

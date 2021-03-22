@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BusinessSetup;
 
 use App\CustodyType;
+use App\DataTables\CustodyTypesDatatable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,13 +13,13 @@ class CustadyType extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param CustodyTypesDatatable $datatable
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
 
-        $custadyType = CustodyType::get();
-        return view('business-setup.custodes-type.index', compact('custadyType'));
+    public function index(CustodyTypesDatatable $datatable)
+    {
+        return  $datatable->render('business-setup.custodes-type.index');
     }
 
     /**

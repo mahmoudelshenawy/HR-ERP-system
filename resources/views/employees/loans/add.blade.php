@@ -16,8 +16,9 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('employee.select_employee')}}<span class="text-danger">*</span></label>
-                                <select class="select " name="employee_id" >
-                                    @foreach($employees as $employee)
+                                <select class="js-example-matcher-start " name="employee_id" >
+                                    <option>{{__('general.select')}}</option>
+                                    @foreach(DB::table('employee_general_data')->where('statue','active')->get() as $employee)
                                         <option value="{{$employee->id}}">{{$employee->employee_name}}</option>
                                     @endforeach
                                 </select>
@@ -58,7 +59,6 @@
                     <div class="submit-section">
                         <button class="btn btn-primary submit-btn" >{{__('general.submit')}}</button>
                     </div>
-
             </div>
             </form>
         </div>

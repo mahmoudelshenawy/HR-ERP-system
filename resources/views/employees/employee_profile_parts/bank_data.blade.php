@@ -7,8 +7,8 @@
                 <li>
                     <div class="title" style="display: inline-block">{{trans('employee.bank_name')}}</div>
                     <div class="text" style="display: inline-block">
-                        {{  ($employee->employee_bank_id)?
-                        DB::table('bank_data')->where('id',$employee->employee_bank_id)->value('name'): trans('employee.no_data')
+                        {{  ($employee->bank_id)?
+                        DB::table('bank_data')->where('id',$employee->bank_id)->value('name'): trans('employee.no_data')
                       }}
                     </div>
                 </li>

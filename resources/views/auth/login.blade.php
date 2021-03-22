@@ -37,20 +37,18 @@
 
             <!-- Account Logo -->
             <div class="account-logo">
-                <a href="{{trans('/home')}}"><img src="img/logo.png" alt="Dreamguy's Technologies"></a>
+                <a href="{{trans('/home')}}"><img src="{{asset('img/ArSoftware..gif')}}" alt="Arabian Software Technologies" style="border-radius: 100%"></a>
             </div>
             <!-- /Account Logo -->
 
             <div class="account-box">
                 <div class="account-wrapper">
-                    <h3 class="account-title">Login</h3>
-                    <p class="account-subtitle">Access to our dashboard</p>
-
+                    <h3 class="account-title">{{__('auth.login')}}</h3>
                     <!-- Account Form -->
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('login') }}" id="loginForm">
                         @csrf
                         <div class="form-group">
-                            <label>Email Address</label>
+                            <label>{{__('auth.email')}}</label>
                             <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                             @error('email')
@@ -62,12 +60,12 @@
                         <div class="form-group">
                             <div class="row">
                                 <div class="col">
-                                    <label>Password</label>
+                                    <label>{{__('auth.password')}}</label>
                                 </div>
                                 <div class="col-auto">
                                     @if (Route::has('password.request'))
                                         <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            {{ __('Forgot Your Password?') }}
+                                            {{ __('auth.forget_pass') }}
                                         </a>
                                     @endif
                                 </div>
@@ -84,11 +82,11 @@
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                             <label class="form-check-label" for="remember">
-                                {{ __('Remember Me') }}
+                                {{ __('auth.remember_me') }}
                             </label>
                         </div>
                         <div class="form-group text-center">
-                            <button class="btn btn-primary account-btn" type="submit">Login</button>
+                            <button class="btn btn-primary account-btn" type="submit">{{__('auth.login')}}</button>
                         </div>
 
                     </form>
@@ -110,6 +108,5 @@
 
 <!-- Custom JS -->
 <script src="{{asset('ar/js/app.js')}}"></script>
-
 </body>
 </html>

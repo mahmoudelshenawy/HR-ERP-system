@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Companion;
+use App\DataTables\CompanionsDatatable;
 use App\EmployeeGeneralData;
 use App\Http\Controllers\Controller;
 use App\MedicalInsurance;
@@ -15,8 +16,7 @@ class CompanionController extends Controller
     private function rules ($id){
         return $rules =  [
             'employee_id'=>'Required',
-            'name' => 'Required|max:50|unique:companions,name,'.$id,
-            'national_id'=> 'nullable|Numeric|digits_between:7,20|Unique:companions,national_id,'.$id,
+            'name' => 'Required|max:50',
             'residence_number'=> 'nullable|Numeric|digits_between:7,20|Unique:companions,residence_number,'.$id,
             'medical_insurance_type'=> 'nullable',
             'medical_insurance_number'=>'nullable|numeric||Unique:companions,medical_insurance_number,'.$id,
@@ -29,14 +29,10 @@ class CompanionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CompanionsDatatable $datatable)
     {
 
-        $companions = Companion::all();
-
-
-        $employees = EmployeeGeneralData::get();
-        return view('employees.companions.index',compact(['companions','employees']));
+        return $datatable->render('employees.companions.index');
     }
 
     /**
@@ -140,15 +136,6 @@ class CompanionController extends Controller
         $companion->name = $request->name ;
         $companion->national_id = $request->national_id ;
         $companion->residence_number = $request->residence_number ;
-        if ($request->has('medical_insurance_statue')){
-            if ($request->medical_insurance_statue == 'on' || $request->medical_insurance_statue == 1){
-                $companion->medical_insurance_statue = 1;
-            }else{
-                $companion->medical_insurance_statue = 0;
-            }
-        }else{
-            $companion->medical_insurance_statue = 0;
-        }
         $companion->medical_insurance_type = $request->medical_insurance_type ;
         $companion->birth_date = $request->birth_date ;
         $companion->medical_insurance_id = $request->medical_insurance_id ;
@@ -174,6 +161,8 @@ class CompanionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $companion =Companion::find($id);
+        $companion->delete();
+        return redirect()->back()->with('success',__('general.success'));
     }
 }

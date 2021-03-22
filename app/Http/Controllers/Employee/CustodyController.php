@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Employee;
 
 use App\CustodyType;
+use App\DataTables\EmployeeCustodyDatatable;
 use App\EmployeeCustody;
 use App\EmployeeGeneralData;
 use App\Http\Controllers\Controller;
@@ -11,24 +12,19 @@ use Illuminate\Support\Facades\Validator;
 
 class CustodyController extends Controller
 {
-    private function rules ($id){
+    private function rules (){
         return $rules =  [
             'employee_id'=>'Required',
-            'name' => 'Required|max:50|unique:companions,name,'.$id,
+            'custody_type_id'=>'Required',
+            'custody_number'=>'Required',
+            'name' => 'Required|max:50',
         ];
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
 
-        $custadys = EmployeeCustody::get();
-        $employees = EmployeeGeneralData::get();
-        $custadys_types = CustodyType::get();
-        return view('employees.custodys.index',compact(['custadys','employees','custadys_types']));
+
+    public function index(EmployeeCustodyDatatable $datatable)
+    {
+        return $datatable->render('employees.custodys.index');
     }
 
     /**
@@ -51,7 +47,7 @@ class CustodyController extends Controller
     {
 
         $custady = new EmployeeCustody();
-        $validator = Validator::make($request->all(),$this->rules($custady->id));
+        $validator = Validator::make($request->all(),$this->rules());
         if ($validator->fails())
         {
             return redirect()->back()
@@ -59,20 +55,16 @@ class CustodyController extends Controller
                 ->withInput();
         }
         $custady->employee_id = $request->employee_id ;
-        $custady->custady_type_id = $request->custady_type_id ;
+        $custady->custody_type_id = $request->custody_type_id ;
         $custady->name = $request->name ;
-        $custady->custady_number = $request->custady_number ;
-        $custady->custady_data = $request->custady_data ;
-        $custady->custady_received_date = $request->custady_received_date ;
-        $custady->custady_expiry_date = $request->custady_expiry_date ;
+        $custady->custody_number = $request->custody_number ;
+        $custady->custody_data = $request->custody_data ;
+        $custady->custody_received_date = $request->custody_received_date ;
+        $custady->custody_checking_date = $request->custody_checking_date ;
+        $custady->custody_insurance_expiry_date = $request->custody_insurance_expiry_date ;
+        $custady->custody_expiry_form_date = $request->custody_expiry_form_date ;
+        $custady->custody_return_date = $request->custody_return_date ;
 
-        if ($request->has('statue')){
-            if ($request->statue == 'on' || $request->statue == 1){
-                $custady->statue = 1;
-            }else{
-                $custady->statue = 0;
-            }
-        }
         $custady->save();
         return redirect()->back()->with('success',__('general.success'));
     }
@@ -110,7 +102,7 @@ class CustodyController extends Controller
     {
 
         $custady =  EmployeeCustody::find($id);
-        $validator = Validator::make($request->all(),$this->rules($custady->id));
+        $validator = Validator::make($request->all(),$this->rules());
         if ($validator->fails())
         {
             return redirect()->back()
@@ -118,20 +110,15 @@ class CustodyController extends Controller
                 ->withInput();
         }
         $custady->employee_id = $request->employee_id ;
-        $custady->custady_type_id = $request->custady_type_id ;
+        $custady->custody_type_id = $request->custody_type_id ;
         $custady->name = $request->name ;
-        $custady->custady_number = $request->custady_number ;
-        $custady->custady_data = $request->custady_data ;
-        $custady->custady_received_date = $request->custady_received_date ;
-        $custady->custady_expiry_date = $request->custady_expiry_date ;
-
-        if ($request->has('statue')){
-            if ($request->statue == 'on' || $request->statue == 1){
-                $custady->statue = 1;
-            }else{
-                $custady->statue = 0;
-            }
-        }
+        $custady->custody_number = $request->custody_number ;
+        $custady->custody_data = $request->custody_data ;
+        $custady->custody_received_date = $request->custody_received_date ;
+        $custady->custody_checking_date = $request->custody_checking_date ;
+        $custady->custody_insurance_expiry_date = $request->custody_insurance_expiry_date ;
+        $custady->custody_expiry_form_date = $request->custody_expiry_form_date ;
+        $custady->custody_return_date = $request->custody_return_date ;
         $custady->save();
         return redirect()->back()->with('success',__('general.success'));
     }
@@ -144,6 +131,9 @@ class CustodyController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $custody = EmployeeCustody::find($id);
+        $custody->delete();
+        return redirect()->back()->with('success',__('general.success'));
+
     }
 }

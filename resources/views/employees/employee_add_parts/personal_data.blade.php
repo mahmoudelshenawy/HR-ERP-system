@@ -212,6 +212,12 @@
                             </div>
                         </div>
                         <div class="form-group col-4">
+                            <label class="focus-label text-muted">{{__('employee.healthy_certificate_notice')}}</label>
+                            <div class="form-focus ">
+                                <input type="text"  name="healthy_certificate_notice" class="form-control " >
+                            </div>
+                        </div>
+                        <div class="form-group col-4">
                             <label class="focus-label text-muted">{{__('employee.healthy_certificate_expiry_date')}}</label>
                             <div class="form-group form-focus focused">
                                 <div class="cal-icon">
@@ -229,6 +235,8 @@
                                 <label class="focus-label text-muted">{{__('employee.cancel_date')}}</label>
                             </div>
                         </div>
+                        <div style="margin-bottom: 5px;display: block" class="col-4"></div>
+                        <div style="margin-bottom: 5px;display: block" class="col-4"></div>
 
                         <div class="form-group col-4">
                             <label class="focus-label text-muted">{{__('employee.educational_qualification')}}</label>

@@ -1,5 +1,5 @@
 <!-- edit business administration Modal -->
-<div id="edit_business_admininstration{{$administration->id}}" class="modal custom-modal fade" role="dialog" >
+<div id="edit_business_admininstration{{$id}}" class="modal custom-modal fade" role="dialog" >
     <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,16 +9,16 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{url('business-setup/business-administration/'.$administration->id)}}">
+                <form method="post" action="{{url('business-setup/business-administration/'.$id)}}">
                     <input name="_method" type="hidden" value="PUT">
                     @csrf()
                     <div class="row">
                         <div class="col-sm-6 ">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.branch')}} <span class="text-danger">*</span></label>
-                                <select class="select" name="branchName">
-                                    @foreach($branchs as $branch)
-                                        @if($branch->id == $administration->businessBranch->id)
+                                <select class="js-example-matcher-start" name="branchName">
+                                    @foreach( \App\BusinessBranch::all() as $branch)
+                                        @if($branch->id == $business_branche_id)
                                             <option selected="selected" value="{{$branch->id}}">{{$branch->name}}</option>
                                             @continue
                                         @endif
@@ -30,7 +30,7 @@
                         <div class="col-sm-6 ">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.administration')}} <span class="text-danger">*</span></label>
-                                <input class="form-control" type="text" name="administrationName" value="{{$administration->name}}" >
+                                <input class="form-control" type="text" name="administrationName" value="{{$name}}" >
                             </div>
                         </div>
                     </div>

@@ -15,8 +15,8 @@
                         <div class="col-sm-6 ">
                             <div class="form-group">
                                 <label class="col-form-label">{{__('business-setup.Departments')}} <span class="text-danger">*</span></label>
-                                <select class="select" name="departmentName[]" multiple>
-                                    @foreach($administration as $administration)
+                                <select class="js-example-matcher-start" name="departmentName[]" multiple>
+                                    @foreach(\App\BusinessAdministration::with('businessBranch')->get() as $administration)
                                         <optgroup label="{{$administration->businessBranch->name}} {!!'&nbsp; &nbsp; &nbsp;'!!} {{$administration->name }}" >
                                             @foreach($administration->department->all() as $department)
                                             <option  value="{{$department->id}}"> {{$department->name}} </option>

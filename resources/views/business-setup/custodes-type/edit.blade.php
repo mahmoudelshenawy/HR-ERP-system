@@ -1,5 +1,5 @@
 <!-- edit business type Modal -->
-<div id="edit_custady_type{{$type->id}}" class="modal custom-modal fade" role="dialog" >
+<div id="edit_custady_type{{$id}}" class="modal custom-modal fade" role="dialog" >
     <div class="modal-dialog modal-dialog-centered " role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,7 +9,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" action="{{url('business-setup/custodys-type/'.$type->id)}}">
+                <form method="post" action="{{url('business-setup/custodys-type/'.$id)}}">
                     <input name="_method" type="hidden" value="PUT">
                     @csrf()
                     <div class="row">
@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-sm-6 ">
                             <div class="form-group">
-                                <input class="form-control" type="text" name="custadyType"  value="{{$type->name}}">
+                                <input class="form-control" type="text" name="custadyType"  value="{{$name}}">
                             </div>
                         </div>
                     </div>

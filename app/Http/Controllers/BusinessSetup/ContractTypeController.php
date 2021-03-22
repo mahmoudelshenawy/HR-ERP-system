@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\BusinessSetup;
 
 use App\ContractType;
+use App\DataTables\ContractTypesDatatable;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -12,12 +13,12 @@ class ContractTypeController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param ContractTypesDatatable $datatable
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ContractTypesDatatable $datatable)
     {
-            $contractType = ContractType::all();
-            return view('business-setup.contract-type.index',compact(['contractType']));
+         return $datatable->render('business-setup.contract-type.index');
     }
 
     /**

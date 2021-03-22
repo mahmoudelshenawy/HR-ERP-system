@@ -3,7 +3,7 @@
 
 		var notificationTimeout;
 
-		//Shows updated notification popup 
+		//Shows updated notification popup
 		var updateNotification = function(task, notificationText, newClass){
 			var notificationPopup = $('.notification-popup ');
 			notificationPopup.find('.task').text(task);
@@ -21,7 +21,7 @@
 			}, 3000);
 		};
 
-		// Adds a new Task to the todo list 
+		// Adds a new Task to the todo list
 		var addTask = function(){
 			// Get the new task entered by user
 			var newTask = $('#new-task').val();
@@ -56,7 +56,7 @@
 
 		// Closes the panel for entering new tasks & shows the button for opening the panel
 		var closeNewTaskPanel = function(){
-			$('.add-task-btn').toggleClass('visible');
+			$('.add-task-datatable_columns').toggleClass('visible');
 			$('.new-task-wrapper').toggleClass('visible');
 			if($('#new-task').hasClass('error')){
 				$('#new-task').removeClass('error');
@@ -64,11 +64,11 @@
 			}
 		};
 
-    // Initalizes HTML template for a given task 
+    // Initalizes HTML template for a given task
     //var taskTemplate = $($('#task-template').html());
-    var taskTemplate = '<li class="task"><div class="task-container"><span class="task-action-btn task-check"><span class="action-circle large complete-btn" title="Mark Complete"><i class="material-icons">check</i></span></span><span class="task-label" contenteditable="true"></span><span class="task-action-btn task-btn-right"><span class="action-circle large" title="Assign"><i class="material-icons">person_add</i></span> <span class="action-circle large delete-btn" title="Delete Task"><i class="material-icons">delete</i></span></span></div></li>';
+    var taskTemplate = '<li class="task"><div class="task-container"><span class="task-action-datatable_columns task-check"><span class="action-circle large complete-datatable_columns" title="Mark Complete"><i class="material-icons">check</i></span></span><span class="task-label" contenteditable="true"></span><span class="task-action-datatable_columns task-datatable_columns-right"><span class="action-circle large" title="Assign"><i class="material-icons">person_add</i></span> <span class="action-circle large delete-datatable_columns" title="Delete Task"><i class="material-icons">delete</i></span></span></div></li>';
     // Shows panel for entering new tasks
-    $('.add-task-btn').click(function() {
+    $('.add-task-datatable_columns').click(function() {
         var newTaskWrapperOffset = $('.new-task-wrapper').offset().top;
         $(this).toggleClass('visible');
         $('.new-task-wrapper').toggleClass('visible');
@@ -81,7 +81,7 @@
     });
 
 		// Deletes task on click of delete button
-		$('#task-list').on('click', '.task-action-btn .delete-btn', function(){
+		$('#task-list').on('click', '.task-action-datatable_columns .delete-datatable_columns', function(){
 			var task = $(this).closest('.task');
 			var taskText = task.find('.task-label').text();
 			task.remove();
@@ -89,7 +89,7 @@
 		});
 
 		// Marks a task as complete
-		$('#task-list').on('click', '.task-action-btn .complete-btn', function(){
+		$('#task-list').on('click', '.task-action-datatable_columns .complete-datatable_columns', function(){
 			var task = $(this).closest('.task');
 			var taskText = task.find('.task-label').text();
 			var newTitle = task.hasClass('completed') ? 'Mark Complete' : 'Mark Incomplete';
